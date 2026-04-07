@@ -1,0 +1,20 @@
+{
+  "name": "openclaw-draw-things-skill",
+  "version": "1.0.1",
+  "description": "OpenClaw skill for local AI image generation via Draw Things CLI",
+  "main": "index.js",
+  "type": "commonjs",
+  "keywords": [
+    "openclaw",
+    "skill",
+    "draw-things",
+    "image-generation",
+    "ai",
+    "local"
+  ],
+  "author": "acwilan",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}

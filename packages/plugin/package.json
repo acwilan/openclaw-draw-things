@@ -1,0 +1,55 @@
+{
+  "name": "openclaw-draw-things",
+  "version": "1.0.1",
+  "description": "OpenClaw tool for Draw Things CLI - local AI image generation on Apple Silicon",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "publish:clawhub": "clawhub package publish . --family code-plugin --source-repo acwilan/openclaw-draw-things --source-commit $(git rev-parse HEAD) --name openclaw-draw-things"
+  },
+  "keywords": [
+    "openclaw",
+    "openclaw-plugin",
+    "openclaw-tool",
+    "image-generation",
+    "draw-things",
+    "stable-diffusion",
+    "flux",
+    "local-ai"
+  ],
+  "author": "Andres",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^4.1.2"
+  },
+  "dependencies": {
+    "@sinclair/typebox": "^0.34.0"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.4.0"
+  },
+  "openclaw": {
+    "extensions": [
+      "./dist/index.js"
+    ],
+    "compat": {
+      "pluginApi": ">=2026.4.0",
+      "minGatewayVersion": "2026.4.0"
+    },
+    "build": {
+      "openclawVersion": "2026.4.5",
+      "pluginSdkVersion": "2026.4.5"
+    }
+  }
+}
