@@ -10,6 +10,65 @@ import { ASPECT_RATIOS, parseSize, roundTo64 } from "./core.js";
 
 const execFileAsync = promisify(execFile);
 
+// Allowed CLI binaries for security
+const ALLOWED_CLI_NAMES = ["draw-things-cli", "draw-things"];
+const MAX_CLI_PATH_LENGTH = 1024;
+
+// Validate CLI path for security
+function validateCliPath(cliPath: string): { valid: boolean; error?: string; resolvedPath: string } {
+  // Check path length
+  if (cliPath.length > MAX_CLI_PATH_LENGTH) {
+    return { valid: false, error: "CLI path exceeds maximum length", resolvedPath: "" };
+  }
+
+  // Check for path traversal attempts
+  if (cliPath.includes("..") || cliPath.includes("~")) {
+    return { valid: false, error: "CLI path contains invalid characters", resolvedPath: "" };
+  }
+
+  // Resolve to absolute path
+  const resolvedPath = cliPath.startsWith("/") ? cliPath : cliPath;
+
+  // Check if binary name is in allowlist (for simple names like "draw-things-cli")
+  const binaryName = cliPath.split("/").pop() || "";
+  if (!ALLOWED_CLI_NAMES.includes(binaryName) && !cliPath.startsWith("/")) {
+    return { valid: false, error: `Binary name "${binaryName}" not in allowed list: ${ALLOWED_CLI_NAMES.join(", ")}`, resolvedPath: "" };
+  }
+
+  // For absolute paths, check the file exists and is executable
+  if (cliPath.startsWith("/")) {
+    if (!existsSync(cliPath)) {
+      return { valid: false, error: `CLI binary not found at: ${cliPath}`, resolvedPath: "" };
+    }
+    
+    // Additional check: ensure it's not a directory
+    const stats = require("node:fs").statSync(cliPath);
+    if (stats.isDirectory()) {
+      return { valid: false, error: `CLI path is a directory, not a file: ${cliPath}`, resolvedPath: "" };
+    }
+  }
+
+  return { valid: true, resolvedPath };
+}
+
+// Validate output directory to prevent path traversal
+function validateOutputDir(outputDir: string): { valid: boolean; error?: string; resolvedPath: string } {
+  // Check for path traversal
+  if (outputDir.includes("..") || outputDir.includes("~")) {
+    return { valid: false, error: "Output directory contains invalid characters", resolvedPath: "" };
+  }
+
+  // Resolve ~ to home directory
+  const resolvedPath = outputDir.replace(/^~\//, homedir() + "/");
+  
+  // Ensure it's within home directory or /tmp
+  if (!resolvedPath.startsWith(homedir()) && !resolvedPath.startsWith("/tmp/")) {
+    return { valid: false, error: "Output directory must be within home directory or /tmp", resolvedPath: "" };
+  }
+
+  return { valid: true, resolvedPath };
+}
+
 interface DrawThingsConfig {
   cliPath?: string;
   outputDir?: string;
@@ -65,6 +124,29 @@ export default definePluginEntry({
       }),
 
       async execute(_id, params): Promise<ToolResult> {
+        // Validate CLI path for security
+        const cliValidation = validateCliPath(cliPath);
+        if (!cliValidation.valid) {
+          return {
+            content: [{ type: "text", text: `Security error: ${cliValidation.error}` }],
+            isError: true,
+            details: { error: "security_validation_failed", reason: cliValidation.error }
+          };
+        }
+
+        // Validate output directory for security
+        const outputValidation = validateOutputDir(outputDir);
+        if (!outputValidation.valid) {
+          return {
+            content: [{ type: "text", text: `Security error: ${outputValidation.error}` }],
+            isError: true,
+            details: { error: "security_validation_failed", reason: outputValidation.error }
+          };
+        }
+
+        const resolvedCliPath = cliValidation.resolvedPath || cliPath;
+        const resolvedOutputDir = outputValidation.resolvedPath;
+
         const {
           prompt,
           model,
@@ -122,18 +204,20 @@ export default definePluginEntry({
         if (modelsDir) baseArgs.push("--models-dir", modelsDir);
 
         try {
-          await mkdir(outputDir, { recursive: true });
+          // Ensure output directory exists (using validated path)
+          await mkdir(resolvedOutputDir, { recursive: true });
 
+          // Validate CLI is accessible (using validated path)
           try {
-            await execFileAsync(cliPath, ["--version"], { timeout: 5000 });
+            await execFileAsync(resolvedCliPath, ["--version"], { timeout: 5000 });
           } catch {
             return {
               content: [{
                 type: "text",
-                text: `Error: Draw Things CLI not found at "${cliPath}". Install from https://releases.drawthings.ai/`
+                text: `Error: Draw Things CLI not found at "${resolvedCliPath}". Install from https://releases.drawthings.ai/`
               }],
               isError: true,
-              details: { error: "cli_not_found", cliPath }
+              details: { error: "cli_not_found", cliPath: resolvedCliPath }
             };
           }
 
@@ -141,13 +225,13 @@ export default definePluginEntry({
 
           for (let i = 0; i < count; i++) {
             const timestamp = Date.now();
-            const outputFile = join(outputDir, `generated-${timestamp}-${i}.png`);
+            const outputFile = join(resolvedOutputDir, `generated-${timestamp}-${i}.png`);
             const runArgs = [...baseArgs, "--output", outputFile];
 
             const seed = paramSeed ?? (count > 1 ? Math.floor(Math.random() * 2147483647) : undefined);
             if (seed !== undefined) runArgs.push("--seed", String(seed));
 
-            const { stderr } = await execFileAsync(cliPath, runArgs, {
+            const { stderr } = await execFileAsync(resolvedCliPath, runArgs, {
               timeout: 300000,
               maxBuffer: 10 * 1024 * 1024,
             });
