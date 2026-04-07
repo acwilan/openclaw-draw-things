@@ -1,0 +1,59 @@
+{
+  "id": "draw-things",
+  "name": "Draw Things Image Generation",
+  "description": "Local AI image generation using Draw Things CLI on Apple Silicon. Supports SD, FLUX, and other models without API costs.",
+  "version": "1.0.0",
+  "author": "Andres Rovira",
+  "license": "MIT",
+  "type": "plugin",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "cliPath": {
+        "type": "string",
+        "default": "draw-things-cli",
+        "description": "Path to draw-things-cli binary"
+      },
+      "modelsDir": {
+        "type": "string",
+        "description": "Optional override for models directory. Supports ~ for home directory."
+      },
+      "outputDir": {
+        "type": "string",
+        "default": "~/Downloads/draw-things-output",
+        "description": "Directory to save generated images. Supports ~ for home directory."
+      },
+      "defaultModel": {
+        "type": "string",
+        "description": "Default model file or name (e.g., 'flux_2_klein_4b_q6p.ckpt')"
+      },
+      "defaultWidth": {
+        "type": "number",
+        "default": 1024,
+        "description": "Default output width in pixels (multiple of 64)"
+      },
+      "defaultHeight": {
+        "type": "number",
+        "default": 1024,
+        "description": "Default output height in pixels (multiple of 64)"
+      },
+      "defaultSteps": {
+        "type": "number",
+        "default": 20,
+        "description": "Default sampling steps. Higher values = better quality but slower generation."
+      },
+      "defaultCfg": {
+        "type": "number",
+        "default": 7.0,
+        "description": "Default CFG guidance scale. Higher values = stricter prompt adherence."
+      }
+    }
+  }
+}
