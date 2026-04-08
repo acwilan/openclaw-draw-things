@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.4
+
+- **BREAKING**: Refactored from tool-based to provider-based architecture
+- Now integrates with OpenClaw's native `image_generate` tool
+- Uses `api.registerImageGenerationProvider()` instead of `api.registerTool()`
+- Removed @sinclair/typebox dependency
+- Added provider declaration in manifest
+
 ## 1.0.3
 
 - Security hardening: Added CLI path validation
