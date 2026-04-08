@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.5
+
+- **SECURITY**: Re-added CLI path validation to provider-based architecture
+- **SECURITY**: Re-added output directory validation
+- Prevent path traversal attacks in image generation provider
+- Validate binary names against allowlist
+- Restrict output to home directory or /tmp
+
 ## 1.0.4
 
 - **BREAKING**: Refactored from tool-based to provider-based architecture

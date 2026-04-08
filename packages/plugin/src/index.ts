@@ -8,6 +8,49 @@ import { homedir } from "node:os";
 
 const execFileAsync = promisify(execFile);
 
+// Allowed CLI binaries for security
+const ALLOWED_CLI_NAMES = ["draw-things-cli", "draw-things"];
+const MAX_CLI_PATH_LENGTH = 1024;
+
+// Validate CLI path for security
+function validateCliPath(cliPath: string): { valid: boolean; error?: string } {
+  // Check path length
+  if (cliPath.length > MAX_CLI_PATH_LENGTH) {
+    return { valid: false, error: "CLI path exceeds maximum length" };
+  }
+
+  // Check for path traversal attempts
+  if (cliPath.includes("..") || cliPath.includes("~")) {
+    return { valid: false, error: "CLI path contains invalid characters" };
+  }
+
+  // Check if binary name is in allowlist (for simple names like "draw-things-cli")
+  const binaryName = cliPath.split("/").pop() || "";
+  if (!ALLOWED_CLI_NAMES.includes(binaryName) && !cliPath.startsWith("/")) {
+    return { valid: false, error: `Binary name "${binaryName}" not in allowed list` };
+  }
+
+  return { valid: true };
+}
+
+// Validate output directory to prevent path traversal
+function validateOutputDir(outputDir: string): { valid: boolean; error?: string; resolvedPath: string } {
+  // Check for path traversal
+  if (outputDir.includes("..")) {
+    return { valid: false, error: "Output directory contains invalid characters", resolvedPath: "" };
+  }
+
+  // Resolve ~ to home directory
+  const resolvedPath = outputDir.replace(/^~\//, homedir() + "/");
+  
+  // Ensure it's within home directory or /tmp
+  if (!resolvedPath.startsWith(homedir()) && !resolvedPath.startsWith("/tmp/")) {
+    return { valid: false, error: "Output directory must be within home directory or /tmp", resolvedPath: "" };
+  }
+
+  return { valid: true, resolvedPath };
+}
+
 // Aspect ratio to dimensions mapping (common SD/FLUX sizes)
 const ASPECT_RATIOS: Record<string, { width: number; height: number }> = {
   "1:1": { width: 1024, height: 1024 },
@@ -54,10 +97,24 @@ export default definePluginEntry({
 
   register(api) {
     const config = api.config as DrawThingsConfig;
-    const cliPath = config.cliPath ?? "draw-things-cli";
-    const outputDir = config.outputDir
+    
+    // Validate CLI path for security
+    const cliPathRaw = config.cliPath ?? "draw-things-cli";
+    const cliValidation = validateCliPath(cliPathRaw);
+    if (!cliValidation.valid) {
+      throw new Error(`Security error: ${cliValidation.error}`);
+    }
+    const cliPath = cliPathRaw;
+    
+    // Validate output directory for security
+    const outputDirRaw = config.outputDir
       ? config.outputDir.replace(/^~\//, homedir() + "/")
       : join(homedir(), "Downloads", "draw-things-output");
+    const outputValidation = validateOutputDir(outputDirRaw);
+    if (!outputValidation.valid) {
+      throw new Error(`Security error: ${outputValidation.error}`);
+    }
+    const outputDir = outputValidation.resolvedPath;
 
     // Register as an image generation provider (integrates with image_generate tool)
     // @ts-ignore - OpenClaw SDK types differ from runtime
