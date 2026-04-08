@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.6
+
+- **CRITICAL FIX**: Add `contracts.imageGenerationProviders` to plugin manifest
+- This declares the plugin provides image generation capability to OpenClaw
+- Required for `image_generate` tool to recognize the provider
+
 ## 1.0.5
 
 - **SECURITY**: Re-added CLI path validation to provider-based architecture
