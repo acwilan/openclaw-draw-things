@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.7
+
+- **CRITICAL**: Align provider API with bundled OpenClaw providers
+- Changed method name from `generate()` to `generateImage()`
+- Added provider metadata: `defaultModel`, `models`, `isConfigured()`, `capabilities`
+- Changed entry point from compiled `./dist/index.js` to source `./src/index.ts`
+- Removed `exports` section from plugin manifest
+- Added `enabledByDefault: true` to plugin manifest
+- Changed return format from `{ path }` to `{ buffer, mimeType, fileName }` (read files back into memory)
+- Added `readFile` import from `node:fs/promises`
+- These changes align our plugin with OpenClaw's bundled provider architecture
+
 ## 1.0.6
 
 - **CRITICAL FIX**: Add `contracts.imageGenerationProviders` to plugin manifest

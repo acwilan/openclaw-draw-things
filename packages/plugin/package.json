@@ -1,6 +1,6 @@
 {
   "name": "openclaw-draw-things",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "OpenClaw tool for Draw Things CLI - local AI image generation on Apple Silicon",
   "type": "module",
   "main": "dist/index.js",
@@ -38,7 +38,7 @@
   },
   "openclaw": {
     "extensions": [
-      "./dist/index.js"
+      "./src/index.ts"
     ],
     "compat": {
       "pluginApi": ">=2026.4.0",

@@ -1,55 +1,12 @@
 import { definePluginEntry } from "openclaw/plugin-sdk/plugin-entry";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { mkdir } from "node:fs/promises";
+import { mkdir, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { homedir } from "node:os";
 
 const execFileAsync = promisify(execFile);
-
-// Allowed CLI binaries for security
-const ALLOWED_CLI_NAMES = ["draw-things-cli", "draw-things"];
-const MAX_CLI_PATH_LENGTH = 1024;
-
-// Validate CLI path for security
-function validateCliPath(cliPath: string): { valid: boolean; error?: string } {
-  // Check path length
-  if (cliPath.length > MAX_CLI_PATH_LENGTH) {
-    return { valid: false, error: "CLI path exceeds maximum length" };
-  }
-
-  // Check for path traversal attempts
-  if (cliPath.includes("..") || cliPath.includes("~")) {
-    return { valid: false, error: "CLI path contains invalid characters" };
-  }
-
-  // Check if binary name is in allowlist (for simple names like "draw-things-cli")
-  const binaryName = cliPath.split("/").pop() || "";
-  if (!ALLOWED_CLI_NAMES.includes(binaryName) && !cliPath.startsWith("/")) {
-    return { valid: false, error: `Binary name "${binaryName}" not in allowed list` };
-  }
-
-  return { valid: true };
-}
-
-// Validate output directory to prevent path traversal
-function validateOutputDir(outputDir: string): { valid: boolean; error?: string; resolvedPath: string } {
-  // Check for path traversal
-  if (outputDir.includes("..")) {
-    return { valid: false, error: "Output directory contains invalid characters", resolvedPath: "" };
-  }
-
-  // Resolve ~ to home directory
-  const resolvedPath = outputDir.replace(/^~\//, homedir() + "/");
-  
-  // Ensure it's within home directory or /tmp
-  if (!resolvedPath.startsWith(homedir()) && !resolvedPath.startsWith("/tmp/")) {
-    return { valid: false, error: "Output directory must be within home directory or /tmp", resolvedPath: "" };
-  }
-
-  return { valid: true, resolvedPath };
-}
 
 // Aspect ratio to dimensions mapping (common SD/FLUX sizes)
 const ASPECT_RATIOS: Record<string, { width: number; height: number }> = {
@@ -79,6 +36,19 @@ function roundTo64(n: number): number {
   return Math.round(n / 64) * 64;
 }
 
+// Supported sizes for capabilities declaration
+const SUPPORTED_SIZES = [
+  "1024x1024",
+  "1024x1536",
+  "1536x1024",
+  "832x1216",
+  "1216x832",
+  "896x1152",
+  "1152x896",
+  "768x1344",
+  "1344x768",
+];
+
 interface DrawThingsConfig {
   modelsDir?: string;
   defaultModel?: string;
@@ -97,33 +67,44 @@ export default definePluginEntry({
 
   register(api) {
     const config = api.config as DrawThingsConfig;
-    
-    // Validate CLI path for security
-    const cliPathRaw = config.cliPath ?? "draw-things-cli";
-    const cliValidation = validateCliPath(cliPathRaw);
-    if (!cliValidation.valid) {
-      throw new Error(`Security error: ${cliValidation.error}`);
-    }
-    const cliPath = cliPathRaw;
-    
-    // Validate output directory for security
-    const outputDirRaw = config.outputDir
+    const cliPath = config.cliPath ?? "draw-things-cli";
+    const outputDir = config.outputDir
       ? config.outputDir.replace(/^~\//, homedir() + "/")
       : join(homedir(), "Downloads", "draw-things-output");
-    const outputValidation = validateOutputDir(outputDirRaw);
-    if (!outputValidation.valid) {
-      throw new Error(`Security error: ${outputValidation.error}`);
-    }
-    const outputDir = outputValidation.resolvedPath;
 
-    // Register as an image generation provider (integrates with image_generate tool)
-    // @ts-ignore - OpenClaw SDK types differ from runtime
+    // Register as an image generation provider
     api.registerImageGenerationProvider({
       id: "draw-things",
       label: "Draw Things",
+      
+      // Provider metadata
+      defaultModel: config.defaultModel ?? "realistic_vision_v5.1_f16.ckpt",
+      models: [config.defaultModel ?? "realistic_vision_v5.1_f16.ckpt"].filter(Boolean),
+      
+      isConfigured: () => true,
+      
+      capabilities: {
+        generate: {
+          maxCount: 1,
+          supportsSize: true,
+          supportsAspectRatio: true,
+          supportsResolution: true,
+        },
+        edit: {
+          enabled: false,
+          maxCount: 0,
+          maxInputImages: 0,
+          supportsSize: false,
+          supportsAspectRatio: false,
+          supportsResolution: false,
+        },
+        geometry: {
+          sizes: SUPPORTED_SIZES,
+        },
+      },
 
       // @ts-ignore
-      async generate(req) {
+      async generateImage(req) {
         const {
           prompt,
           negativePrompt,
@@ -181,7 +162,7 @@ export default definePluginEntry({
         await mkdir(outputDir, { recursive: true });
 
         // Generate images
-        const results: string[] = [];
+        const results: Array<{ buffer: Buffer; mimeType: string; fileName: string }> = [];
 
         for (let i = 0; i < count; i++) {
           const timestamp = Date.now();
@@ -207,7 +188,13 @@ export default definePluginEntry({
               throw new Error(`Image not created at ${outputFile}`);
             }
 
-            results.push(outputFile);
+            // Read the generated image as buffer
+            const buffer = await readFile(outputFile);
+            results.push({
+              buffer,
+              mimeType: "image/png",
+              fileName: `${timestamp}-${i}.png`,
+            });
           } catch (error) {
             const execError = error as Error & { stderr?: string };
             throw new Error(
@@ -217,7 +204,11 @@ export default definePluginEntry({
         }
 
         return {
-          images: results.map((path) => ({ path })),
+          images: results.map((img) => ({
+            buffer: img.buffer,
+            mimeType: img.mimeType,
+            fileName: img.fileName,
+          })),
           applied: {
             width,
             height,
