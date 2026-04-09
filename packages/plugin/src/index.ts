@@ -107,7 +107,6 @@ export default definePluginEntry({
       async generateImage(req) {
         const {
           prompt,
-          negativePrompt,
           model,
           size,
           aspectRatio,
@@ -146,11 +145,6 @@ export default definePluginEntry({
         const modelToUse = model || config.defaultModel;
         if (modelToUse) {
           baseArgs.push("--model", modelToUse);
-        }
-
-        // Add negative prompt if provided
-        if (negativePrompt) {
-          baseArgs.push("--negative-prompt", negativePrompt);
         }
 
         // Add models directory if configured

@@ -1,6 +1,6 @@
 {
   "name": "openclaw-draw-things-monorepo",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Monorepo for OpenClaw Draw Things plugin and skill - local AI image generation",
   "private": true,
   "workspaces": [

@@ -11,6 +11,7 @@
 - Changed return format from `{ path }` to `{ buffer, mimeType, fileName }` (read files back into memory)
 - Added `readFile` import from `node:fs/promises`
 - These changes align our plugin with OpenClaw's bundled provider architecture
+- Fixed npm build/test scripts to work from plugin directory
 
 ## 1.0.6
 
