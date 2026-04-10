@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build-plugin:
+  build:
     runs-on: macos-latest
 
     steps:
@@ -21,28 +21,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build plugin
-        run: npm run build --workspace=packages/plugin
+      - name: Build
+        run: npm run build
 
-      - name: Test plugin
-        run: npm run test --workspace=packages/plugin
-
-  build-skill:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build skill
-        run: npm run build --workspace=packages/skill
-
-      - name: Test skill
-        run: npm run test --workspace=packages/skill
+      - name: Test
+        run: npm run test
