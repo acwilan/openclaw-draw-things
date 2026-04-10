@@ -34,16 +34,22 @@ This repository provides **both** a ClawHub plugin and a local skill:
 
 ### Step 1: Install Draw Things CLI
 
-```bash
-# Download from https://releases.drawthings.ai/p/draw-things-cli-local-media-generation
-# Extract and move to PATH:
+The easiest way to install the CLI is via Homebrew:
 
-sudo mv draw-things-cli /usr/local/bin/
-sudo chmod +x /usr/local/bin/draw-things-cli
+```bash
+# Add the official Draw Things tap
+brew tap drawthingsai/draw-things
+
+# Install the CLI
+brew install draw-things-cli
 
 # Verify installation
 draw-things-cli --help
 ```
+
+**Alternative: Manual Installation**
+
+If you prefer not to use Homebrew, download from the [official releases](https://github.com/drawthingsai/draw-things-cli/releases) and install manually.
 
 ### Step 2: Download AI Models in Draw Things App
 
@@ -166,11 +172,20 @@ Once configured, generate images via OpenClaw:
 
 ### "draw-things-cli not found"
 
+If you installed via Homebrew, make sure it's in your PATH:
+
 ```bash
 # Check if CLI is in PATH
 which draw-things-cli
 
-# If not found, add to PATH or specify full path in config:
+# If not found, try reinstalling:
+brew reinstall draw-things-cli
+```
+
+If you installed manually, ensure the binary is in a directory in your PATH:
+
+```bash
+# Or specify full path in config:
 "cliPath": "/Applications/Draw Things.app/Contents/Resources/draw-things-cli"
 ```
 
