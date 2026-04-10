@@ -1,5 +1,5 @@
 {
-  "name": "acwilan-draw-things",
+  "name": "openclaw-draw-things",
   "version": "1.1.10",
   "description": "OpenClaw tool for Draw Things CLI - local AI image generation on Apple Silicon",
   "type": "module",
