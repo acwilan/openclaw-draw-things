@@ -5,39 +5,37 @@ import { mkdir, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { homedir } from "node:os";
-import type { ImageGenerationRequest, OpenClawConfig, OpenClawPluginApi, ImageGenerationResult, GeneratedImageAsset } from "openclaw/plugin-sdk";
+import type {
+  ImageGenerationRequest,
+  OpenClawConfig,
+  OpenClawPluginApi,
+  ImageGenerationResult,
+} from "openclaw/plugin-sdk";
+import {
+  roundTo64,
+  parseSize,
+  parseAspectRatio,
+  detectModelType,
+  optimizePrompt,
+  getNegativePrompt,
+  getDefaultSize,
+  getRecommendedSteps,
+  getRecommendedCfg,
+} from "./core.js";
 
 const PROVIDER_ID = "draw-things";
 const PROVIDER_NAME = "Draw Things Image Generation";
 const PROVIDER_DESCRIPTION = "Local AI image generation using Draw Things CLI on Apple Silicon";
 const execFileAsync = promisify(execFile);
 
-// Aspect ratio to dimensions mapping (common SD/FLUX sizes)
-const ASPECT_RATIOS: Record<string, { width: number; height: number }> = {
-  "1:1": { width: 1024, height: 1024 },
-  "2:3": { width: 832, height: 1216 },
-  "3:2": { width: 1216, height: 832 },
-  "3:4": { width: 896, height: 1152 },
-  "4:3": { width: 1152, height: 896 },
-  "4:5": { width: 896, height: 1120 },
-  "5:4": { width: 1120, height: 896 },
-  "9:16": { width: 768, height: 1344 },
-  "16:9": { width: 1344, height: 768 },
-  "21:9": { width: 1536, height: 640 },
-};
-
-// Parse size string like "1024x1024"
-function parseSize(size: string): { width: number; height: number } | null {
-  const match = size.match(/^(\d+)x(\d+)$/);
-  if (match) {
-    return { width: parseInt(match[1], 10), height: parseInt(match[2], 10) };
-  }
-  return null;
-}
-
-// Round to nearest multiple of 64 (required by Draw Things)
-function roundTo64(n: number): number {
-  return Math.round(n / 64) * 64;
+interface DrawThingsConfig extends OpenClawConfig {
+  modelsDir?: string;
+  defaultModel?: string;
+  defaultSteps?: number;
+  defaultCfg?: number;
+  outputDir?: string;
+  cliPath?: string;
+  highResSteps?: number; // Steps for img2img upscaling
 }
 
 // Supported sizes for capabilities declaration
@@ -51,18 +49,10 @@ const SUPPORTED_SIZES = [
   "1152x896",
   "768x1344",
   "1344x768",
+  "512x512",
+  "512x768",
+  "768x512",
 ];
-
-interface DrawThingsConfig extends OpenClawConfig {
-  modelsDir?: string;
-  defaultModel?: string;
-  defaultWidth?: number;
-  defaultHeight?: number;
-  defaultSteps?: number;
-  defaultCfg?: number;
-  outputDir?: string;
-  cliPath?: string;
-}
 
 export default definePluginEntry({
   id: PROVIDER_ID,
@@ -86,13 +76,13 @@ export default definePluginEntry({
     api.registerImageGenerationProvider({
       id: PROVIDER_ID,
       label: PROVIDER_NAME,
-      
+
       // Provider metadata
       defaultModel: config.defaultModel ?? "realistic_vision_v5.1_f16.ckpt",
       models: [config.defaultModel ?? "realistic_vision_v5.1_f16.ckpt"].filter(Boolean),
-      
+
       isConfigured: () => true,
-      
+
       capabilities: {
         generate: {
           maxCount: 1,
@@ -122,9 +112,18 @@ export default definePluginEntry({
           count = 1,
         } = req;
 
-        // Determine dimensions
-        let width = config.defaultWidth ?? 1024;
-        let height = config.defaultHeight ?? 1024;
+        // Determine model and its type
+        const modelToUse = model || config.defaultModel || "realistic_vision_v5.1_f16.ckpt";
+        const modelType = detectModelType(modelToUse);
+
+        // Get model-optimized settings
+        const modelDefaultSize = getDefaultSize(modelType);
+        const recommendedSteps = getRecommendedSteps(modelType);
+        const recommendedCfg = getRecommendedCfg(modelType);
+
+        // Determine dimensions based on model type
+        let width = modelDefaultSize.width;
+        let height = modelDefaultSize.height;
 
         if (size) {
           const parsed = parseSize(size);
@@ -132,29 +131,45 @@ export default definePluginEntry({
             width = parsed.width;
             height = parsed.height;
           }
-        } else if (aspectRatio && ASPECT_RATIOS[aspectRatio]) {
-          ({ width, height } = ASPECT_RATIOS[aspectRatio]);
+        } else if (aspectRatio) {
+          const parsed = parseAspectRatio(aspectRatio);
+          if (parsed) {
+            width = parsed.width;
+            height = parsed.height;
+          }
+        }
+
+        // For SD 1.5, cap at 512x512 and use img2img for larger sizes
+        const needsUpscaling = modelType === "sd15" && (width > 512 || height > 512);
+        const targetWidth = width;
+        const targetHeight = height;
+
+        if (modelType === "sd15") {
+          width = 512;
+          height = 512;
         }
 
         // Ensure dimensions are multiples of 64
         width = roundTo64(width);
         height = roundTo64(height);
 
+        // Optimize prompt based on model type
+        const optimizedPrompt = optimizePrompt(prompt, modelType);
+        const negativePrompt = getNegativePrompt(modelType);
+
         // Build CLI arguments
         const baseArgs: string[] = [
           "generate",
-          "--prompt", prompt,
+          "--prompt", optimizedPrompt,
+          "--negative-prompt", negativePrompt,
           "--width", String(width),
           "--height", String(height),
-          "--steps", String(config.defaultSteps ?? 20),
-          "--cfg", String(config.defaultCfg ?? 7.0),
+          "--steps", String(config.defaultSteps ?? recommendedSteps),
+          "--cfg", String(config.defaultCfg ?? recommendedCfg),
         ];
 
         // Add model
-        const modelToUse = model || config.defaultModel;
-        if (modelToUse) {
-          baseArgs.push("--model", modelToUse);
-        }
+        baseArgs.push("--model", modelToUse);
 
         // Add models directory if configured
         if (config.modelsDir) {
@@ -191,13 +206,36 @@ export default definePluginEntry({
               throw new Error(`Image not created at ${outputFile}`);
             }
 
-            // Read the generated image as buffer
-            const buffer = await readFile(outputFile);
-            results.push({
-              buffer,
-              mimeType: "image/png",
-              fileName: `${timestamp}-${i}.png`,
-            });
+            // Handle upscaling for SD 1.5 if needed
+            if (needsUpscaling && modelType === "sd15") {
+              const upscaledFile = join(outputDir, `upscaled-${timestamp}-${i}.png`);
+              await upscaleImage(
+                cliPath,
+                outputFile,
+                upscaledFile,
+                targetWidth,
+                targetHeight,
+                modelToUse,
+                config.modelsDir,
+                config.highResSteps ?? 15
+              );
+
+              // Replace with upscaled version
+              const buffer = await readFile(upscaledFile);
+              results.push({
+                buffer,
+                mimeType: "image/png",
+                fileName: `${timestamp}-${i}.png`,
+              });
+            } else {
+              // Read the generated image as buffer
+              const buffer = await readFile(outputFile);
+              results.push({
+                buffer,
+                mimeType: "image/png",
+                fileName: `${timestamp}-${i}.png`,
+              });
+            }
           } catch (error) {
             const execError = error as Error & { stderr?: string };
             throw new Error(
@@ -212,15 +250,59 @@ export default definePluginEntry({
             mimeType: img.mimeType,
             fileName: img.fileName,
           })),
-          model: modelToUse ?? "default",
+          model: modelToUse,
           metadata: {
-            width,
-            height,
-            steps: config.defaultSteps ?? 20,
-            cfg: config.defaultCfg ?? 7.0,
+            width: needsUpscaling ? targetWidth : width,
+            height: needsUpscaling ? targetHeight : height,
+            steps: config.defaultSteps ?? recommendedSteps,
+            cfg: config.defaultCfg ?? recommendedCfg,
+            optimized: modelType !== "unknown",
           },
         };
       },
     });
+
+    // Helper function for img2img upscaling
+    async function upscaleImage(
+      cli: string,
+      inputPath: string,
+      outputPath: string,
+      targetWidth: number,
+      targetHeight: number,
+      model: string,
+      modelsDir: string | undefined,
+      steps: number
+    ): Promise<void> {
+      const upscaleArgs: string[] = [
+        "generate",
+        "--image", inputPath,
+        "--prompt", "masterpiece, best quality, highly detailed",
+        "--negative-prompt", "worst quality, low quality, blurry",
+        "--width", String(roundTo64(targetWidth)),
+        "--height", String(roundTo64(targetHeight)),
+        "--steps", String(steps),
+        "--cfg", "5.0",
+        "--denoise", "0.4",
+        "--model", model,
+        "--output", outputPath,
+      ];
+
+      if (modelsDir) {
+        upscaleArgs.push("--models-dir", modelsDir);
+      }
+
+      const { stderr } = await execFileAsync(cli, upscaleArgs, {
+        timeout: 300000,
+        maxBuffer: 10 * 1024 * 1024,
+      });
+
+      if (stderr?.trim()) {
+        console.warn(`[draw-things upscaling] stderr: ${stderr}`);
+      }
+
+      if (!existsSync(outputPath)) {
+        throw new Error(`Upscaled image not created at ${outputPath}`);
+      }
+    }
   },
 });
