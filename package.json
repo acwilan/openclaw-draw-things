@@ -1,32 +1,62 @@
 {
-  "name": "@acwilan/openclaw-draw-things",
+  "name": "draw-things",
   "version": "1.1.7",
-  "description": "Monorepo for OpenClaw Draw Things plugin and skill - local AI image generation",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "description": "OpenClaw tool for Draw Things CLI - local AI image generation on Apple Silicon",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "npm run build --workspaces",
-    "test": "npm run test --workspaces",
-    "clean": "rm -rf packages/*/dist packages/*/node_modules",
-    "publish:plugin": "cd packages/plugin && npm run publish:clawhub",
-    "install:skill": "echo 'Copy packages/skill to ~/.openclaw/skills/draw-things'"
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "changelog:check": "conventional-changelog -p angular -i CHANGELOG.md -s --dry-run",
+    "version:patch": "npm version patch && npm run update:manifest && npm run changelog && git add CHANGELOG.md package.json openclaw.plugin.json && git commit -m \"chore(release): update changelog and bump version\"",
+    "version:minor": "npm version minor && npm run update:manifest && npm run changelog && git add CHANGELOG.md package.json openclaw.plugin.json && git commit -m \"chore(release): update changelog and bump version\"",
+    "version:major": "npm version major && npm run update:manifest && npm run changelog && git add CHANGELOG.md package.json openclaw.plugin.json && git commit -m \"chore(release): update changelog and bump version\"",
+    "update:manifest": "node -e \"const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json'));const m=JSON.parse(fs.readFileSync('openclaw.plugin.json'));m.version=p.version;fs.writeFileSync('openclaw.plugin.json',JSON.stringify(m,null,2)+'\\n');console.log('Updated openclaw.plugin.json to',p.version);\"",
+    "publish:clawhub": "clawhub package publish \"$(pwd)\" --family code-plugin --source-repo acwilan/openclaw-draw-things --source-commit $(git rev-parse HEAD) --name draw-things --version $(node -p \"require('./package.json').version\")"
   },
   "keywords": [
     "openclaw",
-    "draw-things",
+    "openclaw-plugin",
+    "openclaw-tool",
     "image-generation",
-    "ai",
-    "monorepo"
+    "draw-things",
+    "stable-diffusion",
+    "flux",
+    "local-ai"
   ],
-  "author": "acwilan",
+  "author": "Andres",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/acwilan/openclaw-draw-things.git"
-  },
   "engines": {
     "node": ">=22"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "conventional-changelog-cli": "^5.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^4.1.2"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.4.0"
+  },
+  "openclaw": {
+    "extensions": [
+      "./src/index.ts"
+    ],
+    "providers": [
+      "draw-things"
+    ],
+    "compat": {
+      "pluginApi": ">=2026.4.0",
+      "minGatewayVersion": "2026.4.0"
+    },
+    "build": {
+      "openclawVersion": "2026.4.5",
+      "pluginSdkVersion": "2026.4.5"
+    }
   }
 }
