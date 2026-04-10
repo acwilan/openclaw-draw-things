@@ -1,3 +1,4 @@
+## [1.1.12](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.11...v1.1.12) (2026-04-10)
 ## [1.1.11](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.10...v1.1.11) (2026-04-10)
 
 
