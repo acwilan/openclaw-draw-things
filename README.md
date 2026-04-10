@@ -5,6 +5,22 @@ Local AI image generation for OpenClaw using [Draw Things](https://drawthings.ai
 [![ClawHub](https://img.shields.io/badge/ClawHub-openclaw--draw--things-blue)](https://clawhub.ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## 📋 Prerequisites
+
+Before installing, ensure you have:
+
+1. **macOS with Apple Silicon** (M1/M2/M3/M4 chip)
+2. **Draw Things app** — Install from [App Store](https://apps.apple.com/us/app/draw-things-ai-generation/id6444050820)
+3. **Draw Things CLI** — Download from [releases page](https://releases.drawthings.ai/p/draw-things-cli-local-media-generation) and:
+   - Extract the binary
+   - Move it to `/usr/local/bin/draw-things-cli` (or any location in your PATH)
+   - Verify: `draw-things-cli --help`
+4. **AI Models** — Download at least one model in Draw Things app:
+   - Open Draw Things app
+   - Go to **Models** → **Download Models**
+   - Recommended: FLUX Schnell or FLUX Klein (fast, good quality)
+   - Note the exact filename (e.g., `flux_2_klein_4b_q6p.ckpt`)
+
 ## 🎯 Two Ways to Install
 
 This repository provides **both** a ClawHub plugin and a local skill:
@@ -13,6 +29,168 @@ This repository provides **both** a ClawHub plugin and a local skill:
 |--------|----------|-----------------|
 | **ClawHub Plugin** | Most users, automatic updates | `openclaw plugins install openclaw-draw-things` |
 | **Local Skill** | Development, customization | Copy `packages/skill/` to `~/.openclaw/skills/draw-things/` |
+
+## 🚀 Complete Setup Guide
+
+### Step 1: Install Draw Things CLI
+
+```bash
+# Download from https://releases.drawthings.ai/p/draw-things-cli-local-media-generation
+# Extract and move to PATH:
+
+sudo mv draw-things-cli /usr/local/bin/
+sudo chmod +x /usr/local/bin/draw-things-cli
+
+# Verify installation
+draw-things-cli --help
+```
+
+### Step 2: Download AI Models in Draw Things App
+
+1. Open **Draw Things** app
+2. Click **Models** in the sidebar
+3. Click **Download Models**
+4. Choose a model (recommendations below)
+5. Wait for download to complete
+6. **Note the exact filename** — you'll need it for configuration
+
+**Recommended Models:**
+
+| Model | Speed | Quality | Filename Example |
+|-------|-------|---------|------------------|
+| FLUX Schnell | ⚡ Very Fast | Good | `flux_1_schnell_q8p.ckpt` |
+| FLUX Klein 4B | Fast | Very Good | `flux_2_klein_4b_q6p.ckpt` |
+| FLUX Dev | Slower | Best | `flux_1_dev_q8p.ckpt` |
+| SDXL | Medium | Good | `sdxl_base_1.0_0.9vae.ckpt` |
+
+### Step 3: Install OpenClaw Plugin
+
+#### Option A: ClawHub Plugin (Recommended)
+
+```bash
+# Install from ClawHub
+openclaw plugins install openclaw-draw-things
+```
+
+#### Option B: Local Skill
+
+```bash
+# Clone repository
+git clone https://github.com/acwilan/openclaw-draw-things.git
+
+# Copy skill to OpenClaw
+cp -r openclaw-draw-things/packages/skill ~/.openclaw/skills/draw-things
+
+# Or symlink for development
+ln -s $(pwd)/openclaw-draw-things/packages/skill ~/.openclaw/skills/draw-things
+```
+
+### Step 4: Configure OpenClaw
+
+Edit your `~/.openclaw/openclaw.json`:
+
+```json
+{
+  "plugins": {
+    "entries": {
+      "@acwilan/draw-things": {
+        "enabled": true,
+        "config": {
+          "cliPath": "draw-things-cli",
+          "defaultModel": "flux_2_klein_4b_q6p.ckpt",
+          "outputDir": "~/Downloads/draw-things-output",
+          "defaultWidth": 1024,
+          "defaultHeight": 1024,
+          "defaultSteps": 20,
+          "defaultCfg": 7.0
+        }
+      }
+    }
+  }
+}
+```
+
+**Configuration Options:**
+
+| Option | Required | Default | Description |
+|--------|----------|---------|-------------|
+| `cliPath` | No | `draw-things-cli` | Path to CLI binary |
+| `defaultModel` | **Yes** | — | Model filename from Draw Things |
+| `outputDir` | No | `~/Downloads/draw-things-output` | Where images are saved |
+| `defaultWidth` | No | `1024` | Image width (multiple of 64) |
+| `defaultHeight` | No | `1024` | Image height (multiple of 64) |
+| `defaultSteps` | No | `20` | Sampling steps (higher = better quality) |
+| `defaultCfg` | No | `7.0` | CFG scale (prompt adherence) |
+
+### Step 5: Restart OpenClaw Gateway
+
+```bash
+openclaw gateway restart
+```
+
+## 🎨 Usage Examples
+
+Once configured, generate images via OpenClaw:
+
+### Basic Generation
+
+```
+/tool draw_things_generate prompt:"A cute robot assistant with blue eyes"
+```
+
+### With Custom Size
+
+```
+/tool draw_things_generate prompt:"Sunset over mountains" width:1344 height:768
+```
+
+### With Aspect Ratio
+
+```
+/tool draw_things_generate prompt:"Portrait of a scientist" aspectRatio:"2:3"
+```
+
+### With Quality Settings
+
+```
+/tool draw_things_generate prompt:"Cyberpunk city" steps:30 cfg:8.5
+```
+
+### Full Example
+
+```
+/tool draw_things_generate prompt:"Serene lake in autumn" aspectRatio:"16:9" steps:25 cfg:7.5
+```
+
+## 🔧 Troubleshooting
+
+### "draw-things-cli not found"
+
+```bash
+# Check if CLI is in PATH
+which draw-things-cli
+
+# If not found, add to PATH or specify full path in config:
+"cliPath": "/Applications/Draw Things.app/Contents/Resources/draw-things-cli"
+```
+
+### "Model not found"
+
+- Verify model filename exactly matches in Draw Things app
+- Check `Models` → `Manage Models` in Draw Things
+- Ensure model downloaded completely
+
+### "No images generated"
+
+- Check `outputDir` exists and is writable
+- Run Draw Things app at least once to initialize
+- Check OpenClaw logs: `openclaw logs`
+
+### Low quality images
+
+- Increase `steps` (25-50 for better quality)
+- Adjust `cfg` (6-8 for most prompts, higher = more literal)
+- Try different models (FLUX Dev > FLUX Schnell for quality)
 
 ## 📦 Packages
 
@@ -31,65 +209,6 @@ Both provide the same functionality — choose your preferred installation metho
 - **📐 Flexible sizing** — Aspect ratios or custom dimensions
 - **🔧 Configurable** — Model, steps, CFG, output directory all customizable
 
-## 📋 Prerequisites
-
-- macOS with Apple Silicon (M1/M2/M3/M4)
-- [Draw Things](https://apps.apple.com/us/app/draw-things-ai-generation/id6444050820) app installed
-- [Draw Things CLI](https://releases.drawthings.ai/p/draw-things-cli-local-media-generation) installed
-
-## 🚀 Quick Start
-
-### Option 1: ClawHub Plugin (Recommended)
-
-```bash
-# Install from ClawHub
-openclaw plugins install openclaw-draw-things
-
-# Configure in ~/.openclaw/openclaw.json
-{
-  "plugins": {
-    "entries": {
-      "draw-things": {
-        "enabled": true,
-        "config": {
-          "defaultModel": "flux_2_klein_4b_q6p.ckpt"
-        }
-      }
-    }
-  }
-}
-
-# Restart gateway
-openclaw gateway restart
-```
-
-### Option 2: Local Skill
-
-```bash
-# Clone and copy skill folder
-git clone https://github.com/acwilan/openclaw-draw-things.git
-cp -r openclaw-draw-things/packages/skill ~/.openclaw/skills/draw-things
-
-# Restart OpenClaw
-openclaw gateway restart
-```
-
-## 🎨 Usage
-
-Once installed, generate images:
-
-```
-/tool draw_things_generate prompt:"A cute robot helper"
-```
-
-Or with options:
-
-```
-/tool draw_things_generate prompt:"A sunset over mountains" aspectRatio:"16:9" steps:30
-```
-
-See full parameter documentation in [packages/skill/SKILL.md](packages/skill/SKILL.md).
-
 ## 🛠️ Development
 
 ```bash
@@ -104,6 +223,9 @@ npm run test
 
 # Clean build artifacts
 npm run clean
+
+# Generate changelog
+npm run changelog
 ```
 
 ### Publishing
@@ -134,7 +256,7 @@ openclaw-draw-things/
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
+3. Commit your changes using [Conventional Commits](https://www.conventionalcommits.org/)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
