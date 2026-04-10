@@ -9,18 +9,24 @@ Local AI image generation for OpenClaw using [Draw Things](https://drawthings.ai
 - 🤖 **Multiple models** - SD, FLUX, and more
 - ⚡ **OpenClaw integration** - Native tool support
 
+## Prerequisites
+
+- **macOS with Apple Silicon** (M1/M2/M3/M4)
+- **[Draw Things](https://drawthings.ai/)** app installed from Mac App Store
+- **[Draw Things CLI](https://drawthings.ai/cli)** installed via Homebrew:
+  ```bash
+  brew tap drawthingsai/draw-things
+  brew install draw-things-cli
+  ```
+- **OpenClaw 2026.4.0** or later
+- **AI Models** downloaded in Draw Things app (see Models section below)
+
 ## Installation
 
-### Prerequisites
-
-- macOS with Apple Silicon (M1/M2/M3)
-- [Draw Things](https://drawthings.ai/) app installed
-- OpenClaw 2026.4.0 or later
-
-### Install from ClawHub
+### From ClawHub (Recommended)
 
 ```bash
-openclaw plugins install draw-things
+openclaw plugins install openclaw-draw-things
 ```
 
 ### Manual Installation
@@ -78,6 +84,22 @@ Add to your `~/.openclaw/openclaw.json`:
 | `defaultSteps` | number | 20 | Sampling steps (higher = better quality, slower) |
 | `defaultCfg` | number | 7 | CFG guidance scale (higher = stricter prompt adherence) |
 
+## Models
+
+Download models from the Draw Things model browser (open Draw Things app → Models → Download Models):
+
+| Model | Description |
+|-------|-------------|
+| `realistic_vision_v5.1_f16.ckpt` | Photorealistic images (recommended default) |
+| `flux_2_klein_4b_q6p.ckpt` | FLUX.2 Klein 4-bit quantized (fast, good quality) |
+| `flux_1_schnell_4b_q8p.ckpt` | FLUX.1 Schnell for fast generation |
+| `sd_xl_base_1.0_f16.ckpt` | Stable Diffusion XL |
+
+Models are stored in:  
+`~/Library/Containers/com.liuliu.draw-things/Data/Documents/Models/`
+
+Or specify a custom `modelsDir` in the plugin config.
+
 ## Usage
 
 Once installed and configured, OpenClaw can generate images:
@@ -92,24 +114,73 @@ Or use explicit tool calls:
 Use image_generate to create a cartoon cat
 ```
 
-## Models
+## Troubleshooting
 
-Download models from the Draw Things model browser. Common models include:
+### "No image-generation provider registered"
 
-- `realistic_vision_v5.1_f16.ckpt` - Photorealistic images
-- `flux_2_klein_4b_q6p.ckpt` - FLUX.2 Klein 4-bit quantized
-- `sd_xl_base_1.0_f16.ckpt` - Stable Diffusion XL
+Make sure the `imageGenerationModel.primary` is set correctly:
+```json
+"imageGenerationModel": {
+  "primary": "draw-things/your-model.ckpt"
+}
+```
 
-Place models in `~/Library/Containers/com.liuliu.draw-things/Data/Documents/Models/` or specify a custom `modelsDir` in config.
+### "Model not found"
+
+- Verify the model file exists in Draw Things
+- Check the exact filename in the Models directory
+- Ensure `modelsDir` config matches your setup if using custom location
+
+### "draw-things-cli command not found"
+
+Install the CLI via Homebrew:
+```bash
+brew tap drawthingsai/draw-things
+brew install draw-things-cli
+```
+
+### Plugin not loading
+
+Check the plugin is enabled:
+```bash
+openclaw plugins list
+```
+
+If needed, restart the gateway:
+```bash
+openclaw gateway restart
+```
 
 ## Development
 
 ```bash
+# Install dependencies
 npm install
+
+# Build
 npm run build
-npm run dev        # Watch mode
-npm test           # Run tests
+
+# Watch mode
+npm run dev
+
+# Run tests
+npm test
 ```
+
+### Releasing
+
+```bash
+# Patch version (1.0.0 → 1.0.1)
+npm run release:patch
+
+# Minor version (1.0.0 → 1.1.0)
+npm run release:minor
+
+# Major version (1.0.0 → 2.0.0)
+npm run release:major
+```
+
+This handles version bump, manifest sync, changelog, commit, tag, and push automatically.
 
 ## License
 
@@ -119,4 +190,6 @@ MIT © Andres Rovira
 
 - [GitHub](https://github.com/acwilan/openclaw-draw-things)
 - [Draw Things](https://drawthings.ai/)
+- [Draw Things CLI](https://drawthings.ai/cli)
 - [OpenClaw](https://openclaw.ai/)
+- [ClawHub Package](https://clawhub.ai)
