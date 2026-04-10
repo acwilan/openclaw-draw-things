@@ -1,3 +1,11 @@
+## [1.1.9](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.8...v1.1.9) (2026-04-10)
+
+
+### Bug Fixes
+
+* revert to draw-things plugin ID for existing package ([f2189f5](https://github.com/acwilan/openclaw-draw-things/commit/f2189f5))
+
+
 ## [1.1.7](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.6...v1.1.7) (2026-04-10)
 
 
