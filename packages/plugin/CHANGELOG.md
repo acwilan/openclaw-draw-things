@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/acwilan/openclaw-draw-things/compare/v1.0.3...v1.1.0) (2026-04-10)
+
+
+### Bug Fixes
+
+* add contracts declaration for image generation capability ([b7ce92c](https://github.com/acwilan/openclaw-draw-things/commit/b7ce92c7bbe5680c23a3513183a38786e0c4457c))
+* align provider API with OpenClaw bundled providers ([2158ffc](https://github.com/acwilan/openclaw-draw-things/commit/2158ffcef732ca998b9c207ee273cf4dbfb043fe))
+* improve plugin capabilities ([80dc413](https://github.com/acwilan/openclaw-draw-things/commit/80dc4136b16b04c514a1afab2bb3d12a308f2edc))
+
+
+### Features
+
+* update plugin definition ([01b1ccb](https://github.com/acwilan/openclaw-draw-things/commit/01b1ccb6fd65f12e1d567636b9b341968c120020))
 # Changelog
 
 ## 1.0.7
