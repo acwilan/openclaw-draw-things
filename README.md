@@ -11,10 +11,11 @@ Before installing, ensure you have:
 
 1. **macOS with Apple Silicon** (M1/M2/M3/M4 chip)
 2. **Draw Things app** — Install from [App Store](https://apps.apple.com/us/app/draw-things-ai-generation/id6444050820)
-3. **Draw Things CLI** — Download from [releases page](https://releases.drawthings.ai/p/draw-things-cli-local-media-generation) and:
-   - Extract the binary
-   - Move it to `/usr/local/bin/draw-things-cli` (or any location in your PATH)
-   - Verify: `draw-things-cli --help`
+3. **Draw Things CLI** — Install via Homebrew:
+   ```bash
+   brew tap drawthingsai/draw-things
+   brew install draw-things-cli
+   ```
 4. **AI Models** — Download at least one model in Draw Things app:
    - Open Draw Things app
    - Go to **Models** → **Download Models**
