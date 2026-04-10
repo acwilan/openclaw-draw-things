@@ -7,7 +7,7 @@ import { join } from "node:path";
 import { homedir } from "node:os";
 import type { ImageGenerationRequest, OpenClawConfig, OpenClawPluginApi, ImageGenerationResult, GeneratedImageAsset } from "openclaw/plugin-sdk";
 
-const PROVIDER_ID = "draw-things";
+const PROVIDER_ID = "@acwilan/draw-things";
 const PROVIDER_NAME = "Draw Things Image Generation";
 const PROVIDER_DESCRIPTION = "Local AI image generation using Draw Things CLI on Apple Silicon";
 const execFileAsync = promisify(execFile);

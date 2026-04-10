@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
+jobs:
+  build-and-publish:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build all packages
+        run: npm run build
+
+      - name: Test all packages
+        run: npm run test
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish plugin to npm
+        run: npm publish --workspace=packages/plugin --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish plugin to ClawHub
+        run: |
+          if command -v clawhub &> /dev/null; then
+            cd packages/plugin && npm run publish:clawhub
+          else
+            echo "ClawHub CLI not installed, skipping ClawHub publish"
+          fi
+        env:
+          CLAWHUB_TOKEN: ${{ secrets.CLAWHUB_TOKEN }}
+
+      - name: Publish skill to ClawHub
+        run: |
+          if command -v clawhub &> /dev/null; then
+            cd packages/skill && clawhub skill publish . --source-repo acwilan/openclaw-draw-things --source-commit $(git rev-parse HEAD)
+          else
+            echo "ClawHub CLI not installed, skipping ClawHub skill publish"
+          fi
+        env:
+          CLAWHUB_TOKEN: ${{ secrets.CLAWHUB_TOKEN }}
