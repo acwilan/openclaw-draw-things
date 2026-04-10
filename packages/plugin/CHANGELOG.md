@@ -1,3 +1,9 @@
+## [1.1.5](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.4...v1.1.5) (2026-04-10)
+
+
+### Bug Fixes
+
+* update openclaw.plugin.json version to 1.1.4 ([03005af](https://github.com/acwilan/openclaw-draw-things/commit/03005af8446823fec8d665df06bfed8e5c52eff8))
 ## [1.1.4](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.3...v1.1.4) (2026-04-10)
 
 
