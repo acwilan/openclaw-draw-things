@@ -1,5 +1,5 @@
 {
-  "name": "openclaw-draw-things-skill",
+  "name": "@acwilan/openclaw-draw-things-skill",
   "version": "1.0.8",
   "description": "OpenClaw skill for local AI image generation via Draw Things CLI",
   "main": "index.js",
