@@ -5,7 +5,11 @@ import { mkdir, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { homedir } from "node:os";
+import type { ImageGenerationRequest, OpenClawConfig, OpenClawPluginApi, ImageGenerationResult, GeneratedImageAsset } from "openclaw/plugin-sdk";
 
+const PROVIDER_ID = "draw-things";
+const PROVIDER_NAME = "Draw Things Image Generation";
+const PROVIDER_DESCRIPTION = "Local AI image generation using Draw Things CLI on Apple Silicon";
 const execFileAsync = promisify(execFile);
 
 // Aspect ratio to dimensions mapping (common SD/FLUX sizes)
@@ -49,7 +53,7 @@ const SUPPORTED_SIZES = [
   "1344x768",
 ];
 
-interface DrawThingsConfig {
+interface DrawThingsConfig extends OpenClawConfig {
   modelsDir?: string;
   defaultModel?: string;
   defaultWidth?: number;
@@ -61,21 +65,27 @@ interface DrawThingsConfig {
 }
 
 export default definePluginEntry({
-  id: "draw-things",
-  name: "Draw Things Image Generation",
-  description: "Local AI image generation using Draw Things CLI on Apple Silicon",
+  id: PROVIDER_ID,
+  name: PROVIDER_NAME,
+  description: PROVIDER_DESCRIPTION,
 
-  register(api) {
+  register(api: OpenClawPluginApi) {
     const config = api.config as DrawThingsConfig;
     const cliPath = config.cliPath ?? "draw-things-cli";
     const outputDir = config.outputDir
       ? config.outputDir.replace(/^~\//, homedir() + "/")
       : join(homedir(), "Downloads", "draw-things-output");
 
+    api.registerProvider({
+      id: PROVIDER_ID,
+      label: PROVIDER_NAME,
+      auth: [],
+    });
+
     // Register as an image generation provider
     api.registerImageGenerationProvider({
-      id: "draw-things",
-      label: "Draw Things",
+      id: PROVIDER_ID,
+      label: PROVIDER_NAME,
       
       // Provider metadata
       defaultModel: config.defaultModel ?? "realistic_vision_v5.1_f16.ckpt",
@@ -103,8 +113,7 @@ export default definePluginEntry({
         },
       },
 
-      // @ts-ignore
-      async generateImage(req) {
+      async generateImage(req: ImageGenerationRequest) {
         const {
           prompt,
           model,
@@ -203,12 +212,12 @@ export default definePluginEntry({
             mimeType: img.mimeType,
             fileName: img.fileName,
           })),
-          applied: {
+          model: modelToUse ?? "default",
+          metadata: {
             width,
             height,
             steps: config.defaultSteps ?? 20,
             cfg: config.defaultCfg ?? 7.0,
-            model: modelToUse ?? "default",
           },
         };
       },

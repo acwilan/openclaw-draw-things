@@ -1,6 +1,6 @@
 {
   "name": "openclaw-draw-things",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "OpenClaw tool for Draw Things CLI - local AI image generation on Apple Silicon",
   "type": "module",
   "main": "dist/index.js",
@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "publish:clawhub": "clawhub package publish . --family code-plugin --source-repo acwilan/openclaw-draw-things --source-commit $(git rev-parse HEAD) --name openclaw-draw-things"
+    "publish:clawhub": "clawhub package publish . --family code-plugin --source-repo acwilan/openclaw-draw-things --source-commit $(git rev-parse HEAD) --name openclaw-draw-things --version 1.0.8"
   },
   "keywords": [
     "openclaw",
@@ -40,6 +40,7 @@
     "extensions": [
       "./src/index.ts"
     ],
+    "providers": ["draw-things"],
     "compat": {
       "pluginApi": ">=2026.4.0",
       "minGatewayVersion": "2026.4.0"
