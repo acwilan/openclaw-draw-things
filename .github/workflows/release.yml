@@ -53,4 +53,4 @@ jobs:
           CLAWHUB_TOKEN: ${{ secrets.CLAWHUB_TOKEN }}
 
       - name: Publish to ClawHub
-        run: clawhub package publish "$(pwd)" --family code-plugin --source-repo acwilan/openclaw-draw-things --source-commit $(git rev-parse HEAD) --name acwilan-draw-things --version $(node -p "require('./package.json').version")
+        run: clawhub package publish "$(pwd)" --family code-plugin --source-repo acwilan/openclaw-draw-things --source-commit $(git rev-parse HEAD) --name openclaw-draw-things --version $(node -p "require('./package.json').version")
