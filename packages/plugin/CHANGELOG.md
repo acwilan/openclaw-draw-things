@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.5...v1.1.6) (2026-04-10)
+
+
+### Features
+
+* change plugin ID to draw-things for ClawHub compatibility ([b3d6b53](https://github.com/acwilan/openclaw-draw-things/commit/b3d6b5356a00c63109e181120c10fff5d21ef8fc))
+## [1.1.6](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.5...v1.1.6) (2026-04-10)
 ## [1.1.5](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.4...v1.1.5) (2026-04-10)
 
 
