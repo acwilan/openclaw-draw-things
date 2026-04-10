@@ -47,12 +47,13 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         continue-on-error: true
 
-      - name: Publish plugin to ClawHub
-        run: cd packages/plugin && clawhub package publish "$(pwd)" --family code-plugin --source-repo acwilan/openclaw-draw-things --source-commit $(git rev-parse HEAD) --name @acwilan/draw-things --version $(node -p "require('./package.json').version")
+      - name: Login to ClawHub
+        run: clawhub login --token ${{ secrets.CLAWHUB_TOKEN }}
         env:
           CLAWHUB_TOKEN: ${{ secrets.CLAWHUB_TOKEN }}
 
+      - name: Publish plugin to ClawHub
+        run: cd packages/plugin && clawhub package publish "$(pwd)" --family code-plugin --source-repo acwilan/openclaw-draw-things --source-commit $(git rev-parse HEAD) --name @acwilan/draw-things --version $(node -p "require('./package.json').version")
+
       - name: Publish skill to ClawHub
         run: cd packages/skill && clawhub skill publish . --source-repo acwilan/openclaw-draw-things --source-commit $(git rev-parse HEAD)
-        env:
-          CLAWHUB_TOKEN: ${{ secrets.CLAWHUB_TOKEN }}
