@@ -13,9 +13,10 @@
     "test:watch": "vitest",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "changelog:check": "conventional-changelog -p angular -i CHANGELOG.md -s --dry-run",
-    "version:patch": "npm version patch && npm run changelog && git add CHANGELOG.md package.json && git commit -m \"chore(release): update changelog and bump version\"",
-    "version:minor": "npm version minor && npm run changelog && git add CHANGELOG.md package.json && git commit -m \"chore(release): update changelog and bump version\"",
-    "version:major": "npm version major && npm run changelog && git add CHANGELOG.md package.json && git commit -m \"chore(release): update changelog and bump version\"",
+    "version:patch": "npm version patch && npm run update:manifest && npm run changelog && git add CHANGELOG.md package.json openclaw.plugin.json && git commit -m \"chore(release): update changelog and bump version\"",
+    "version:minor": "npm version minor && npm run update:manifest && npm run changelog && git add CHANGELOG.md package.json openclaw.plugin.json && git commit -m \"chore(release): update changelog and bump version\"",
+    "version:major": "npm version major && npm run update:manifest && npm run changelog && git add CHANGELOG.md package.json openclaw.plugin.json && git commit -m \"chore(release): update changelog and bump version\"",
+    "update:manifest": "node -e \"const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json'));const m=JSON.parse(fs.readFileSync('openclaw.plugin.json'));m.version=p.version;fs.writeFileSync('openclaw.plugin.json',JSON.stringify(m,null,2)+'\\n');console.log('Updated openclaw.plugin.json to',p.version);\"",
     "publish:clawhub": "clawhub package publish \"$(pwd)\" --family code-plugin --source-repo acwilan/openclaw-draw-things --source-commit $(git rev-parse HEAD) --name @acwilan/draw-things --version $(node -p \"require('./package.json').version\")"
   },
   "keywords": [
