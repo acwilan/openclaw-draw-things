@@ -129,7 +129,43 @@ Edit your `~/.openclaw/openclaw.json`:
 | `defaultSteps` | No | `20` | Sampling steps (higher = better quality) |
 | `defaultCfg` | No | `7.0` | CFG scale (prompt adherence) |
 
-### Step 5: Restart OpenClaw Gateway
+**OpenClaw Defaults (for automatic image generation):**
+
+| Option | Location | Description |
+|--------|----------|-------------|
+| `plugins.defaults.imageGenerationProvider` | Root of `openclaw.json` | Set to `"@acwilan/draw-things"` to make Draw Things the default image generator |
+
+### Step 5: Set as Default Image Generator (Optional)
+
+To use Draw Things as your default image generator (so you can just say "generate an image of..."), update your `~/.openclaw/openclaw.json`:
+
+```json
+{
+  "plugins": {
+    "entries": {
+      "@acwilan/draw-things": {
+        "enabled": true,
+        "config": {
+          "cliPath": "draw-things-cli",
+          "defaultModel": "flux_2_klein_4b_q6p.ckpt",
+          "outputDir": "~/Downloads/draw-things-output",
+          "defaultWidth": 1024,
+          "defaultHeight": 1024,
+          "defaultSteps": 20,
+          "defaultCfg": 7.0
+        }
+      }
+    },
+    "defaults": {
+      "imageGenerationProvider": "@acwilan/draw-things"
+    }
+  }
+}
+```
+
+The key addition is the `defaults.imageGenerationProvider` setting, which tells OpenClaw to use Draw Things for all image generation requests.
+
+### Step 6: Restart OpenClaw Gateway
 
 ```bash
 openclaw gateway restart
@@ -137,12 +173,26 @@ openclaw gateway restart
 
 ## 🎨 Usage Examples
 
-Once configured, generate images via OpenClaw:
+### With Default Provider Set
 
-### Basic Generation
+Once configured as the default, simply ask:
 
 ```
-/tool draw_things_generate prompt:"A cute robot assistant with blue eyes"
+generate an image of a sunset over mountains
+```
+
+Or use the shorthand:
+
+```
+image a cute robot assistant with blue eyes
+```
+
+### Without Default Provider (Explicit Tool Calls)
+
+If you prefer not to set a default, use explicit tool calls:
+
+```
+/tool draw_things_generate prompt:"A sunset over mountains"
 ```
 
 ### With Custom Size
