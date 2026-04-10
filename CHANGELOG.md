@@ -1,3 +1,9 @@
+## [1.1.13](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.12...v1.1.13) (2026-04-10)
+
+
+### Features
+
+* model-aware generation with optimized prompts and settings ([68a4af7](https://github.com/acwilan/openclaw-draw-things/commit/68a4af7ce2746aad1d9d375fd59aad013d153bc7)), closes [hi#res](https://github.com/hi/issues/res)
 ## [1.1.12](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.11...v1.1.12) (2026-04-10)
 ## [1.1.11](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.10...v1.1.11) (2026-04-10)
 
