@@ -1,3 +1,11 @@
+## [1.1.11](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.10...v1.1.11) (2026-04-10)
+
+
+### Bug Fixes
+
+* change package name to openclaw-draw-things ([73c7c4e](https://github.com/acwilan/openclaw-draw-things/commit/73c7c4e))
+
+
 ## [1.1.10](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.9...v1.1.10) (2026-04-10)
 
 
