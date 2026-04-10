@@ -8,11 +8,11 @@
   "type": "plugin",
   "enabledByDefault": true,
   "providers": [
-    "@acwilan/draw-things"
+    "draw-things"
   ],
   "contracts": {
     "imageGenerationProviders": [
-      "@acwilan/draw-things"
+      "draw-things"
     ]
   },
   "configSchema": {

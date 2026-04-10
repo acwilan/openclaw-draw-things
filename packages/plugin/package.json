@@ -48,7 +48,7 @@
       "./src/index.ts"
     ],
     "providers": [
-      "@acwilan/draw-things"
+      "draw-things"
     ],
     "compat": {
       "pluginApi": ">=2026.4.0",
