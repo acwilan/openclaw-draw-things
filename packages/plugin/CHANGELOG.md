@@ -1,3 +1,9 @@
+## [1.1.4](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.3...v1.1.4) (2026-04-10)
+
+
+### Bug Fixes
+
+* revert provider ID back to @acwilan/draw-things ([b968370](https://github.com/acwilan/openclaw-draw-things/commit/b9683709762df2a663b6d27869e5d25baac00b00))
 ## [1.1.2](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.1...v1.1.2) (2026-04-10)
 
 
