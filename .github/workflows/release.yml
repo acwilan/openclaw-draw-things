@@ -25,6 +25,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install ClawHub CLI
+        run: npx clawhub@latest install sonoscli
+
       - name: Build all packages
         run: npm run build
 
@@ -45,12 +48,7 @@ jobs:
         continue-on-error: true
 
       - name: Publish plugin to ClawHub
-        run: |
-          if command -v clawhub &> /dev/null; then
-            cd packages/plugin && npm run publish:clawhub
-          else
-            echo "ClawHub CLI not installed, skipping ClawHub publish"
-          fi
+        run: cd packages/plugin && npm run publish:clawhub
         env:
           CLAWHUB_TOKEN: ${{ secrets.CLAWHUB_TOKEN }}
 
