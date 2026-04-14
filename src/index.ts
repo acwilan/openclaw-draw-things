@@ -282,7 +282,7 @@ export default definePluginEntry({
         "--height", String(roundTo64(targetHeight)),
         "--steps", String(steps),
         "--cfg", "5.0",
-        "--denoise", "0.4",
+        "--strength", "0.4",
         "--model", model,
         "--output", outputPath,
       ];
