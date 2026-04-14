@@ -1,7 +1,7 @@
 import { definePluginEntry } from "openclaw/plugin-sdk/plugin-entry";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { mkdir, readFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { homedir } from "node:os";
@@ -91,12 +91,12 @@ export default definePluginEntry({
           supportsResolution: true,
         },
         edit: {
-          enabled: false,
-          maxCount: 0,
-          maxInputImages: 0,
-          supportsSize: false,
-          supportsAspectRatio: false,
-          supportsResolution: false,
+          enabled: true,
+          maxCount: 1,
+          maxInputImages: 1,
+          supportsSize: true,
+          supportsAspectRatio: true,
+          supportsResolution: true,
         },
         geometry: {
           sizes: SUPPORTED_SIZES,
@@ -110,6 +110,7 @@ export default definePluginEntry({
           size,
           aspectRatio,
           count = 1,
+          inputImages,
         } = req;
 
         // Determine model and its type
@@ -157,6 +158,18 @@ export default definePluginEntry({
         const optimizedPrompt = optimizePrompt(prompt, modelType);
         const negativePrompt = getNegativePrompt(modelType);
 
+        // Check if we're doing img2img (editing)
+        const isImg2Img = inputImages && inputImages.length > 0;
+        let inputImagePath: string | undefined;
+
+        // If editing, save the input image to a temp file
+        if (isImg2Img) {
+          const inputImage = inputImages![0];
+          const timestamp = Date.now();
+          inputImagePath = join(outputDir, `input-${timestamp}.png`);
+          await writeFile(inputImagePath, inputImage.buffer);
+        }
+
         // Build CLI arguments
         const baseArgs: string[] = [
           "generate",
@@ -167,6 +180,12 @@ export default definePluginEntry({
           "--steps", String(config.defaultSteps ?? recommendedSteps),
           "--cfg", String(config.defaultCfg ?? recommendedCfg),
         ];
+
+        // Add img2img parameters if editing
+        if (isImg2Img && inputImagePath) {
+          baseArgs.push("--image", inputImagePath);
+          baseArgs.push("--strength", "0.5"); // Default strength for editing - 0.5 = moderate change
+        }
 
         // Add model
         baseArgs.push("--model", modelToUse);
@@ -257,6 +276,8 @@ export default definePluginEntry({
             steps: config.defaultSteps ?? recommendedSteps,
             cfg: config.defaultCfg ?? recommendedCfg,
             optimized: modelType !== "unknown",
+            edit: isImg2Img,
+            strength: isImg2Img ? 0.5 : undefined,
           },
         };
       },

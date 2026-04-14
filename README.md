@@ -5,6 +5,7 @@ Local AI image generation for OpenClaw using [Draw Things](https://drawthings.ai
 ## Features
 
 - 🖼️ **Local image generation** - No API keys needed
+- 🎨 **Image editing (img2img)** - Transform existing images with AI
 - 🍎 **Apple Silicon optimized** - Uses Core ML for fast inference
 - 🤖 **Multiple models** - SD, FLUX, and more
 - ⚡ **OpenClaw integration** - Native tool support
@@ -113,6 +114,31 @@ Or use explicit tool calls:
 ```
 Use image_generate to create a cartoon cat
 ```
+
+### Image Editing (img2img)
+
+Transform existing images using AI:
+
+```
+Turn this photo into a watercolor painting [attach image]
+```
+
+Or explicitly:
+
+```
+Edit this image to look like a comic book style
+```
+
+The plugin supports:
+- **One input image** per edit request
+- **Configurable strength** (how much the image changes)
+- **Style transformations** - watercolor, oil painting, cartoon, etc.
+- **Detail enhancement** - improve or modify specific aspects
+
+**Tips for best results:**
+- Use clear style descriptions (e.g., "oil painting", "anime style", "sketch")
+- For subtle changes, the strength is moderate (0.5)
+- Works with any supported model
 
 ## Troubleshooting
 
