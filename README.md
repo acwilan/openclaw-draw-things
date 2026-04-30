@@ -58,8 +58,7 @@ Add to your `~/.openclaw/openclaw.json`:
           "cliPath": "draw-things-cli",
           "outputDir": "~/Downloads/draw-things-output",
           "defaultModel": "realistic_vision_v5.1_f16.ckpt",
-          "defaultWidth": 1024,
-          "defaultHeight": 1024,
+          "defaultSize": "1024x1024",
           "defaultEditStrength": 0.5,
           "defaultPromptMode": "auto"
         }
@@ -84,8 +83,9 @@ Add to your `~/.openclaw/openclaw.json`:
 | `modelsDir` | string | - | Optional override for models directory |
 | `outputDir` | string | `~/Downloads/draw-things-output` | Where to save generated images |
 | `defaultModel` | string | `realistic_vision_v5.1_f16.ckpt` | Default model file |
-| `defaultWidth` | number | model-specific | Default output width (rounded to multiple of 64) |
-| `defaultHeight` | number | model-specific | Default output height (rounded to multiple of 64) |
+| `defaultSize` | string | model-specific | Default output size like `1024x1024`; reduced to Draw Things-compatible multiples of 64 and takes precedence over aspect ratio/defaultWidth/defaultHeight when request size is omitted |
+| `defaultWidth` | number | model-specific | Legacy/default output width (reduced to multiple of 64) |
+| `defaultHeight` | number | model-specific | Legacy/default output height (reduced to multiple of 64) |
 | `defaultSteps` | number | model-specific | Override sampling steps |
 | `defaultCfg` | number | model-specific | Override CFG guidance scale |
 | `defaultEditStrength` | number | 0.5 | Img2img/edit strength from 0-1 |

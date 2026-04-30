@@ -2,7 +2,7 @@
   "id": "draw-things",
   "name": "Draw Things Image Generation",
   "description": "Local AI image generation using Draw Things CLI on Apple Silicon. Supports SD, SDXL, FLUX, and other Draw Things models without API costs.",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "author": "Andres Rovira",
   "authorUrl": "https://github.com/acwilan",
   "license": "MIT",
@@ -41,15 +41,20 @@
         "default": "realistic_vision_v5.1_f16.ckpt",
         "description": "Default model file or name."
       },
+      "defaultSize": {
+        "type": "string",
+        "pattern": "^[0-9]+x[0-9]+$",
+        "description": "Optional default output size like 1024x1024. Used when the request does not explicitly provide size; reduced to Draw Things-compatible multiples of 64. Takes precedence over aspect ratio and defaultWidth/defaultHeight."
+      },
       "defaultWidth": {
         "type": "number",
         "minimum": 64,
-        "description": "Optional default output width when no size or aspect ratio is requested. Rounded to a multiple of 64. If omitted, model metadata chooses the size."
+        "description": "Optional default output width when no defaultSize is configured and no size or aspect ratio is requested. Reduced to a Draw Things-compatible multiple of 64. If omitted, model metadata chooses the size."
       },
       "defaultHeight": {
         "type": "number",
         "minimum": 64,
-        "description": "Optional default output height when no size or aspect ratio is requested. Rounded to a multiple of 64. If omitted, model metadata chooses the size."
+        "description": "Optional default output height when no defaultSize is configured and no size or aspect ratio is requested. Reduced to a Draw Things-compatible multiple of 64. If omitted, model metadata chooses the size."
       },
       "defaultSteps": {
         "type": "number",

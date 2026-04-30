@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/acwilan/openclaw-draw-things/compare/v1.5.1...v1.6.0) (2026-04-30)
+
+### Features
+
+- Added `defaultSize` plugin config, using values like `1024x1024` to control generated image width and height when request size is omitted.
+- `defaultSize` is passed through to Draw Things CLI as `--width` and `--height`, reduced to compatible multiples of 64, and takes precedence over aspect-ratio sizing.
+
 ## [1.5.1](https://github.com/acwilan/openclaw-draw-things/compare/v1.5.0...v1.5.1) (2026-04-30)
 
 ### Bug Fixes

@@ -7,10 +7,10 @@ import type {
   OpenClawPluginApi,
 } from "openclaw/plugin-sdk";
 import {
+  floorTo64,
   getNegativePrompt,
   optimizePrompt,
   parseSize,
-  roundTo64,
 } from "./core.js";
 import {
   DEFAULT_TIMEOUT_MS,
@@ -172,12 +172,17 @@ export function buildGenerationSettingsForModel(
   let width = config.defaultWidth ?? metadata.defaultSize.width;
   let height = config.defaultHeight ?? metadata.defaultSize.height;
 
+  const configuredSize = config.defaultSize ? parseSize(config.defaultSize) : null;
+
   if (req.size) {
     const parsed = parseSize(req.size);
     if (parsed) {
       width = parsed.width;
       height = parsed.height;
     }
+  } else if (configuredSize) {
+    width = configuredSize.width;
+    height = configuredSize.height;
   } else if (req.aspectRatio) {
     const parsed = sizeForAspectRatio(req.aspectRatio);
     if (parsed) {
@@ -192,8 +197,8 @@ export function buildGenerationSettingsForModel(
     height *= 4;
   }
 
-  const targetWidth = roundTo64(width);
-  const targetHeight = roundTo64(height);
+  const targetWidth = floorTo64(width);
+  const targetHeight = floorTo64(height);
   const needsUpscaling = (metadata.type === "sd1" || metadata.type === "sd2") && (targetWidth > 512 || targetHeight > 512);
 
   if (needsUpscaling) {

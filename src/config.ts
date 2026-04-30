@@ -9,6 +9,7 @@ export const DEFAULT_TIMEOUT_MS = 300_000;
 export interface DrawThingsConfig extends OpenClawConfig {
   modelsDir?: string;
   defaultModel?: string;
+  defaultSize?: string;
   defaultWidth?: number;
   defaultHeight?: number;
   defaultSteps?: number;

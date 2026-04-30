@@ -4,6 +4,7 @@ import {
   DEFAULT_SIZE,
   SD15_SIZE,
   parseSize,
+  floorTo64,
   roundTo64,
   parseAspectRatio,
   detectModelType,
@@ -57,6 +58,16 @@ describe("Core utilities", () => {
       expect(roundTo64(1024)).toBe(1024);
       expect(roundTo64(1000)).toBe(1024);
       expect(roundTo64(1025)).toBe(1024);
+    });
+  });
+
+  describe("floorTo64", () => {
+    it("should reduce to the nearest lower multiple of 64", () => {
+      expect(floorTo64(32)).toBe(64);
+      expect(floorTo64(100)).toBe(64);
+      expect(floorTo64(1024)).toBe(1024);
+      expect(floorTo64(1088)).toBe(1088);
+      expect(floorTo64(1100)).toBe(1088);
     });
   });
 
@@ -351,6 +362,36 @@ describe("Image generation provider internals", () => {
     expect(settings.steps).toBe(4);
     expect(settings.cfg).toBe(3);
     expect(settings.optimizedPrompt).toBe(baseReq.prompt);
+  });
+
+  it("should use configured defaultSize for CLI width and height when request size is omitted", () => {
+    const settings = buildGenerationSettingsForModel(
+      { ...baseReq, aspectRatio: "16:9" },
+      { defaultSize: "1024x1024" },
+      "sd_xl_base_1.0_f16.ckpt"
+    );
+    const args = buildGenerateArgs(settings, {}, undefined);
+
+    expect(settings.width).toBe(1024);
+    expect(settings.height).toBe(1024);
+    expect(args).toContain("--width");
+    expect(args[args.indexOf("--width") + 1]).toBe("1024");
+    expect(args).toContain("--height");
+    expect(args[args.indexOf("--height") + 1]).toBe("1024");
+  });
+
+  it("should reduce configured defaultSize dimensions to Draw Things multiples of 64", () => {
+    const settings = buildGenerationSettingsForModel(
+      { ...baseReq },
+      { defaultSize: "1100x1100" },
+      "sd_xl_base_1.0_f16.ckpt"
+    );
+    const args = buildGenerateArgs(settings, {}, undefined);
+
+    expect(settings.width).toBe(1088);
+    expect(settings.height).toBe(1088);
+    expect(args[args.indexOf("--width") + 1]).toBe("1088");
+    expect(args[args.indexOf("--height") + 1]).toBe("1088");
   });
 
   it("should build CLI args including img2img options and models dir", () => {

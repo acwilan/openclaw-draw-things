@@ -3,9 +3,14 @@
 export const DEFAULT_SIZE = { width: 1024, height: 1024 };
 export const SD15_SIZE = { width: 512, height: 512 };
 
-// Round to nearest multiple of 64 (required by Draw Things)
+// Round to nearest multiple of 64.
 export function roundTo64(n: number): number {
   return Math.round(n / 64) * 64;
+}
+
+// Reduce to a Draw Things-compatible multiple of 64 without exceeding the requested value.
+export function floorTo64(n: number): number {
+  return Math.max(64, Math.floor(n / 64) * 64);
 }
 
 // Parse size string like "1024x1024"
