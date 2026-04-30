@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## [1.4.0](https://github.com/acwilan/openclaw-draw-things/compare/v1.3.0...v1.4.0) (2026-04-29)
 
 ### Features
 

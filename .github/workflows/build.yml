@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: macos-latest
@@ -21,8 +24,17 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Check generated model catalog
+        run: npm run check:model-catalog
+
+      - name: Lint / typecheck
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
       - name: Build
         run: npm run build
 
-      - name: Test
-        run: npm run test
+      - name: Verify package contents
+        run: npm pack --dry-run

@@ -25,14 +25,23 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Check generated model catalog
+        run: npm run check:model-catalog
+
+      - name: Lint / typecheck
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
       - name: Build
         run: npm run build
 
-      - name: Test
-        run: npm run test
+      - name: Verify package contents
+        run: npm pack --dry-run
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
         env:
