@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.5.1](https://github.com/acwilan/openclaw-draw-things/compare/v1.5.0...v1.5.1) (2026-04-30)
+
+### Bug Fixes
+
+- Pass `modelsDir` config to CLI when listing downloaded models, ensuring custom model directories are properly detected during fallback and readiness checks.
+
 ## [1.5.0](https://github.com/acwilan/openclaw-draw-things/compare/v1.4.1...v1.5.0) (2026-10-13)
 
 ### Features

@@ -1,6 +1,6 @@
 {
   "name": "openclaw-draw-things",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "OpenClaw tool for Draw Things CLI - local AI image generation on Apple Silicon",
   "type": "module",
   "main": "dist/index.js",
