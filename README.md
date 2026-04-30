@@ -210,9 +210,6 @@ npm run dev
 
 # Run tests
 npm test
-
-# Refresh Draw Things model catalog
-npm run update:model-catalog
 ```
 
 ### Releasing

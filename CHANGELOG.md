@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.1](https://github.com/acwilan/openclaw-draw-things/compare/v1.4.0...v1.4.1) (2026-10-13)
+
+### Bug Fixes
+
+- Remove mjs files from distribution.
+
 ## [1.4.0](https://github.com/acwilan/openclaw-draw-things/compare/v1.3.0...v1.4.0) (2026-04-29)
 
 ### Features
