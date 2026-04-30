@@ -41,10 +41,11 @@ export async function runDrawThings(cliPath: string, args: string[], timeout: nu
 
 export async function listDrawThingsModels(
   cliPath = "draw-things-cli",
-  options: { downloadedOnly?: boolean; timeoutMs?: number } = {}
+  options: { downloadedOnly?: boolean; timeoutMs?: number; modelsDir?: string } = {}
 ): Promise<DrawThingsCliModel[]> {
   const args = ["models", "list"];
   if (options.downloadedOnly) args.push("--downloaded-only");
+  if (options.modelsDir) args.push("--models-dir", options.modelsDir);
   const { stdout } = await execFileAsync(cliPath, args, {
     timeout: options.timeoutMs ?? DEFAULT_TIMEOUT_MS,
     maxBuffer: 20 * 1024 * 1024,
@@ -54,10 +55,11 @@ export async function listDrawThingsModels(
 
 export function listDrawThingsModelsSync(
   cliPath = "draw-things-cli",
-  options: { downloadedOnly?: boolean; timeoutMs?: number } = {}
+  options: { downloadedOnly?: boolean; timeoutMs?: number; modelsDir?: string } = {}
 ): DrawThingsCliModel[] {
   const args = ["models", "list"];
   if (options.downloadedOnly) args.push("--downloaded-only");
+  if (options.modelsDir) args.push("--models-dir", options.modelsDir);
   const stdout = execFileSync(cliPath, args, {
     timeout: options.timeoutMs ?? 10_000,
     maxBuffer: 20 * 1024 * 1024,
@@ -110,6 +112,7 @@ export async function resolveDownloadedModel(
     downloaded = await listDrawThingsModels(config.cliPath ?? "draw-things-cli", {
       downloadedOnly: true,
       timeoutMs: Math.min(config.timeoutMs ?? 10_000, 10_000),
+      modelsDir: config.modelsDir,
     });
   } catch {
     return candidate;
@@ -138,7 +141,7 @@ export function isDrawThingsConfigured(config: DrawThingsConfig): boolean {
     const parentDir = dirname(outputDir);
     if (!existsSync(outputDir) && !existsSync(parentDir)) return false;
 
-    const downloaded = listDrawThingsModelsSync(cliPath, { downloadedOnly: true });
+    const downloaded = listDrawThingsModelsSync(cliPath, { downloadedOnly: true, modelsDir: config.modelsDir });
     if (downloaded.length === 0) return false;
 
     const selected = config.defaultModel ?? DEFAULT_DRAW_THINGS_MODEL;
