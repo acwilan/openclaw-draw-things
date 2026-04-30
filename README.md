@@ -94,12 +94,6 @@ Add to your `~/.openclaw/openclaw.json`:
 
 The provider now uses a generated Draw Things CLI model catalog plus curated overrides for defaults like size, steps, CFG, prompt mode, and high-resolution behavior. Unknown model names still work via best-effort type inference, but adding curated overrides in `src/model-metadata.ts` gives more predictable behavior.
 
-Refresh the generated catalog after updating Draw Things CLI:
-
-```bash
-npm run update:model-catalog
-```
-
 At runtime, the plugin checks `draw-things-cli models list --downloaded-only` and falls back to a downloaded model if the configured/requested model is not present locally.
 
 Download models from the Draw Things model browser (open Draw Things app → Models → Download Models):

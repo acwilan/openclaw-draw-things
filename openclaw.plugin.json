@@ -2,7 +2,7 @@
   "id": "draw-things",
   "name": "Draw Things Image Generation",
   "description": "Local AI image generation using Draw Things CLI on Apple Silicon. Supports SD, SDXL, FLUX, and other Draw Things models without API costs.",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "author": "Andres Rovira",
   "authorUrl": "https://github.com/acwilan",
   "license": "MIT",
