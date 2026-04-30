@@ -44,16 +44,6 @@ npm run build
 openclaw plugins install "$(pwd)"
 ```
 
-### Manual Installation
-
-```bash
-git clone https://github.com/acwilan/openclaw-draw-things.git
-cd openclaw-draw-things
-npm install
-npm run build
-openclaw plugins install "$(pwd)"
-```
-
 ## Configuration
 
 Add to your `~/.openclaw/openclaw.json`:
