@@ -13,14 +13,16 @@ Local AI image generation for OpenClaw using [Draw Things](https://drawthings.ai
 ## Prerequisites
 
 - **macOS with Apple Silicon** (M1/M2/M3/M4)
-- **[Draw Things](https://drawthings.ai/)** app installed from Mac App Store
 - **[Draw Things CLI](https://drawthings.ai/cli)** installed via Homebrew:
   ```bash
   brew tap drawthingsai/draw-things
   brew install draw-things-cli
   ```
+- *(Optional)* **[Draw Things App](https://drawthings.ai/)** from Mac App Store — easier GUI for browsing and downloading models
 - **OpenClaw 2026.4.0** or later
-- **AI Models** downloaded in Draw Things app (see Models section below)
+- **AI Models** downloaded (see Models section below)
+
+> 💡 **Note**: Only the CLI is required. The Draw Things app is optional but provides a convenient GUI for browsing and downloading models.
 
 ## Installation
 
@@ -108,7 +110,29 @@ The provider now uses a generated Draw Things CLI model catalog plus curated ove
 
 At runtime, the plugin checks `draw-things-cli models list --downloaded-only` and falls back to a downloaded model if the configured/requested model is not present locally.
 
-Download models from the Draw Things model browser (open Draw Things app → Models → Download Models):
+Models are stored in:  
+`~/Library/Containers/com.liuliu.draw-things/Data/Documents/Models/`
+
+Or specify a custom `modelsDir` in the plugin config.
+
+### Downloading Models via CLI
+
+If you prefer not to use the Draw Things app, you can download models entirely via CLI:
+
+```bash
+# List currently downloaded models
+draw-things-cli models list --downloaded-only
+
+# List all available models for download
+draw-things-cli models list
+
+# Download a specific model
+draw-things-cli models ensure --model <model-name>
+```
+
+> 💡 **Tip**: If using a custom models directory, add `--models-dir <path>` to match your plugin config.
+
+### Recommended Models
 
 | Model | Description |
 |-------|-------------|
@@ -117,10 +141,8 @@ Download models from the Draw Things model browser (open Draw Things app → Mod
 | `flux_1_schnell_4b_q8p.ckpt` | FLUX.1 Schnell for fast generation |
 | `sd_xl_base_1.0_f16.ckpt` | Stable Diffusion XL |
 
-Models are stored in:  
-`~/Library/Containers/com.liuliu.draw-things/Data/Documents/Models/`
-
-Or specify a custom `modelsDir` in the plugin config.
+**Via Draw Things App** (optional GUI method):  
+Open Draw Things app → Models → Download Models
 
 ## Usage
 
