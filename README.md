@@ -27,7 +27,19 @@ Local AI image generation for OpenClaw using [Draw Things](https://drawthings.ai
 ### From ClawHub (Recommended)
 
 ```bash
-openclaw plugins install openclaw-draw-things
+openclaw plugins install openclaw-draw-things --dangerously-force-unsafe-install
+```
+
+> ⚠️ **Security Notice**: This plugin executes shell commands to run the Draw Things CLI. OpenClaw's security scanner flags this as "dangerous code patterns". This is expected and necessary for the plugin to function — it uses `child_process` to spawn the `draw-things-cli` binary for local image generation. Use the `--dangerously-force-unsafe-install` flag to proceed with installation.
+
+### Manual Installation
+
+```bash
+git clone https://github.com/acwilan/openclaw-draw-things.git
+cd openclaw-draw-things
+npm install
+npm run build
+openclaw plugins install "$(pwd)"
 ```
 
 ### Manual Installation
