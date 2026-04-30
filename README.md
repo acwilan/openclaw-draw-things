@@ -56,8 +56,8 @@ Add to your `~/.openclaw/openclaw.json`:
           "defaultModel": "realistic_vision_v5.1_f16.ckpt",
           "defaultWidth": 1024,
           "defaultHeight": 1024,
-          "defaultSteps": 20,
-          "defaultCfg": 7
+          "defaultEditStrength": 0.5,
+          "defaultPromptMode": "auto"
         }
       }
     }
@@ -79,13 +79,28 @@ Add to your `~/.openclaw/openclaw.json`:
 | `cliPath` | string | `draw-things-cli` | Path to Draw Things CLI binary |
 | `modelsDir` | string | - | Optional override for models directory |
 | `outputDir` | string | `~/Downloads/draw-things-output` | Where to save generated images |
-| `defaultModel` | string | - | Default model file (e.g., `flux_2_klein_4b_q6p.ckpt`) |
-| `defaultWidth` | number | 1024 | Default output width (multiple of 64) |
-| `defaultHeight` | number | 1024 | Default output height (multiple of 64) |
-| `defaultSteps` | number | 20 | Sampling steps (higher = better quality, slower) |
-| `defaultCfg` | number | 7 | CFG guidance scale (higher = stricter prompt adherence) |
+| `defaultModel` | string | `realistic_vision_v5.1_f16.ckpt` | Default model file |
+| `defaultWidth` | number | model-specific | Default output width (rounded to multiple of 64) |
+| `defaultHeight` | number | model-specific | Default output height (rounded to multiple of 64) |
+| `defaultSteps` | number | model-specific | Override sampling steps |
+| `defaultCfg` | number | model-specific | Override CFG guidance scale |
+| `defaultEditStrength` | number | 0.5 | Img2img/edit strength from 0-1 |
+| `defaultPromptMode` | string | `auto` | `auto`, `natural`, or `tagged` prompt handling |
+| `enablePromptOptimization` | boolean | mode-dependent | Enable/disable model-aware prompt conversion |
+| `highResSteps` | number | 15 | SD 1.5 high-resolution img2img upscale steps |
+| `timeoutMs` | number | 300000 | Per-generation CLI timeout in milliseconds |
 
 ## Models
+
+The provider now uses a generated Draw Things CLI model catalog plus curated overrides for defaults like size, steps, CFG, prompt mode, and high-resolution behavior. Unknown model names still work via best-effort type inference, but adding curated overrides in `src/model-metadata.ts` gives more predictable behavior.
+
+Refresh the generated catalog after updating Draw Things CLI:
+
+```bash
+npm run update:model-catalog
+```
+
+At runtime, the plugin checks `draw-things-cli models list --downloaded-only` and falls back to a downloaded model if the configured/requested model is not present locally.
 
 Download models from the Draw Things model browser (open Draw Things app → Models → Download Models):
 
@@ -131,7 +146,7 @@ Edit this image to look like a comic book style
 
 The plugin supports:
 - **One input image** per edit request
-- **Configurable strength** (how much the image changes)
+- **Configurable strength** via `defaultEditStrength` (how much the image changes)
 - **Style transformations** - watercolor, oil painting, cartoon, etc.
 - **Detail enhancement** - improve or modify specific aspects
 
@@ -141,6 +156,10 @@ The plugin supports:
 - Works with any supported model
 
 ## Troubleshooting
+
+### Provider does not show as configured
+
+The plugin reports configured only when it can find `draw-things-cli`, the output path is plausible, and `draw-things-cli models list --downloaded-only` returns at least one local model.
 
 ### "No image-generation provider registered"
 
@@ -191,6 +210,9 @@ npm run dev
 
 # Run tests
 npm test
+
+# Refresh Draw Things model catalog
+npm run update:model-catalog
 ```
 
 ### Releasing

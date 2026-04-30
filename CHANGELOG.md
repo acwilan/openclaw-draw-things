@@ -1,3 +1,48 @@
+# Changelog
+
+## Unreleased
+
+### Features
+
+- Added generated Draw Things model catalog from `draw-things-cli models list`, including inferred `baseType` and `purpose` metadata while keeping local `downloaded` state out of the committed catalog.
+- Added runtime downloaded-model validation/fallback using `draw-things-cli models list --downloaded-only` before generation and in provider readiness checks.
+- Refactored provider internals into Venice-style modules: `config`, `draw-things-cli`, `image-generation`, and a thin plugin entrypoint.
+- Added model-aware defaults for SD1/SD2 512-first upscaling, Pony prompt tagging, FLUX settings, and generated catalog fallback inference.
+- Added `npm run update:model-catalog` for refreshing the generated model catalog.
+
+### Improvements
+
+- Modernized plugin manifest fields for current OpenClaw packaging expectations.
+- Added package `files` allowlist and ClawHub packaging fix so built `dist` artifacts are included.
+- Replaced broken ESLint script with TypeScript typecheck-based `npm run lint`.
+- Expanded tests for CLI table parsing, generated catalog shape, downloaded fallback selection, generation settings, prompt modes, and CLI arg construction.
+
+## [1.3.0](https://github.com/acwilan/openclaw-draw-things/compare/v1.2.1...v1.3.0) (2026-04-29)
+
+### Features
+
+- Added image editing / img2img support through Draw Things CLI.
+- Added edit capabilities to the OpenClaw image generation provider.
+
+## [1.2.1](https://github.com/acwilan/openclaw-draw-things/compare/v1.2.0...v1.2.1) (2026-04-29)
+
+### Bug Fixes
+
+- Updated Draw Things CLI img2img option from `--denoise` to `--strength` for CLI compatibility.
+
+## [1.2.0](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.14...v1.2.0) (2026-04-10)
+
+### Features
+
+- Added model-aware generation with optimized prompts and settings.
+- Added high-resolution SD1/SD2 generation path using 512px generation followed by img2img upscaling.
+
+## [1.1.14](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.13...v1.1.14) (2026-04-10)
+
+### Maintenance
+
+- Release version synchronization.
+
 ## [1.1.13](https://github.com/acwilan/openclaw-draw-things/compare/v1.1.12...v1.1.13) (2026-04-10)
 
 

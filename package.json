@@ -5,12 +5,20 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "openclaw.plugin.json",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "lint": "npm run typecheck",
     "test": "vitest run",
     "test:watch": "vitest",
+    "update:model-catalog": "node scripts/update-model-catalog.mjs",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "changelog:check": "conventional-changelog -p angular -i CHANGELOG.md -s --dry-run",
     "release:patch": "./scripts/release.sh patch",

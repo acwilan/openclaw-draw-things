@@ -1,0 +1,2274 @@
+{
+  "generatedFrom": "draw-things-cli models list",
+  "generatedAt": "2026-04-30T04:49:28.035Z",
+  "models": [
+    {
+      "model": "ltx_2.3_22b_distilled_q8p.ckpt",
+      "name": "LTX-2.3 22B [distilled]",
+      "source": "official",
+      "baseType": "ltx",
+      "purpose": "text-to-video",
+      "huggingFace": "Lightricks/LTX-2.3"
+    },
+    {
+      "model": "ltx_2.3_22b_distilled_i8x.ckpt",
+      "name": "LTX-2.3 22B [distilled] (8-bit S)",
+      "source": "official",
+      "baseType": "ltx",
+      "purpose": "text-to-video",
+      "huggingFace": "Lightricks/LTX-2.3"
+    },
+    {
+      "model": "ltx_2.3_22b_distilled_q6p.ckpt",
+      "name": "LTX-2.3 22B [distilled] (6-bit)",
+      "source": "official",
+      "baseType": "ltx",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "ltx_2.3_22b_dev_q8p.ckpt",
+      "name": "LTX-2.3 22B [dev]",
+      "source": "official",
+      "baseType": "ltx",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "ltx_2.3_22b_dev_i8x.ckpt",
+      "name": "LTX-2.3 22B [dev] (8-bit S)",
+      "source": "official",
+      "baseType": "ltx",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "ltx_2.3_22b_dev_q6p.ckpt",
+      "name": "LTX-2.3 22B [dev] (6-bit)",
+      "source": "official",
+      "baseType": "ltx",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "ltx_2_19b_distilled_q8p.ckpt",
+      "name": "LTX-2 19B [distilled]",
+      "source": "official",
+      "baseType": "ltx",
+      "purpose": "text-to-video",
+      "huggingFace": "Lightricks/LTX-2"
+    },
+    {
+      "model": "ltx_2_19b_distilled_q6p.ckpt",
+      "name": "LTX-2 19B [distilled] (6-bit)",
+      "source": "official",
+      "baseType": "ltx",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "ltx_2_19b_dev_q8p.ckpt",
+      "name": "LTX-2 19B [dev]",
+      "source": "official",
+      "baseType": "ltx",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "ltx_2_19b_dev_q6p.ckpt",
+      "name": "LTX-2 19B [dev] (6-bit)",
+      "source": "official",
+      "baseType": "ltx",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "z_image_turbo_1.0_q8p.ckpt",
+      "name": "Z Image Turbo 1.0",
+      "source": "official",
+      "baseType": "z-image",
+      "purpose": "text-to-image",
+      "huggingFace": "Tongyi-MAI/Z-Image-Turbo"
+    },
+    {
+      "model": "z_image_turbo_1.0_i8x.ckpt",
+      "name": "Z Image Turbo 1.0 (8-bit S)",
+      "source": "official",
+      "baseType": "z-image",
+      "purpose": "text-to-image",
+      "huggingFace": "Tongyi-MAI/Z-Image-Turbo"
+    },
+    {
+      "model": "z_image_turbo_1.0_q6p.ckpt",
+      "name": "Z Image Turbo 1.0 (6-bit)",
+      "source": "official",
+      "baseType": "z-image",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "z_image_1.0_q8p.ckpt",
+      "name": "Z Image Base 1.0",
+      "source": "official",
+      "baseType": "z-image",
+      "purpose": "text-to-image",
+      "huggingFace": "Tongyi-MAI/Z-Image"
+    },
+    {
+      "model": "z_image_1.0_i8x.ckpt",
+      "name": "Z Image Base 1.0 (8-bit S)",
+      "source": "official",
+      "baseType": "z-image",
+      "purpose": "text-to-image",
+      "huggingFace": "Tongyi-MAI/Z-Image"
+    },
+    {
+      "model": "z_image_1.0_q6p.ckpt",
+      "name": "Z Image Base 1.0 (6-bit)",
+      "source": "official",
+      "baseType": "z-image",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "qwen_image_2512_q8p.ckpt",
+      "name": "Qwen Image 2512",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "text-to-image",
+      "huggingFace": "Qwen/Qwen-Image-2512"
+    },
+    {
+      "model": "qwen_image_2512_i8x.ckpt",
+      "name": "Qwen Image 2512 (8-bit S)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "text-to-image",
+      "huggingFace": "Qwen/Qwen-Image-2512"
+    },
+    {
+      "model": "qwen_image_2512_q6p.ckpt",
+      "name": "Qwen Image 2512 (6-bit)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "qwen_image_2512_bf16_q8p.ckpt",
+      "name": "Qwen Image 2512 (BF16)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "qwen_image_2512_bf16_i8x.ckpt",
+      "name": "Qwen Image 2512 (BF16, 8-bit S)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "qwen_image_2512_bf16_q6p.ckpt",
+      "name": "Qwen Image 2512 (BF16, 6-bit)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_2_klein_4b_q8p.ckpt",
+      "name": "FLUX.2 [klein] 4B",
+      "source": "official",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-klein-4B"
+    },
+    {
+      "model": "flux_2_klein_4b_i8x.ckpt",
+      "name": "FLUX.2 [klein] 4B (8-bit S)",
+      "source": "official",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-klein-4B"
+    },
+    {
+      "model": "flux_2_klein_4b_q6p.ckpt",
+      "name": "FLUX.2 [klein] 4B (6-bit)",
+      "source": "official",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_2_klein_base_4b_q8p.ckpt",
+      "name": "FLUX.2 [klein] 4B Base",
+      "source": "official",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-klein-base-4B"
+    },
+    {
+      "model": "flux_2_klein_base_4b_i8x.ckpt",
+      "name": "FLUX.2 [klein] 4B Base (8-bit S)",
+      "source": "official",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-klein-base-4B"
+    },
+    {
+      "model": "flux_2_klein_base_4b_q6p.ckpt",
+      "name": "FLUX.2 [klein] 4B Base (6-bit)",
+      "source": "official",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "qwen_image_1.0_q8p.ckpt",
+      "name": "Qwen Image 1.0",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "text-to-image",
+      "huggingFace": "Qwen/Qwen-Image"
+    },
+    {
+      "model": "qwen_image_1.0_q6p.ckpt",
+      "name": "Qwen Image 1.0 (6-bit)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "qwen_image_1.0_bf16_q8p.ckpt",
+      "name": "Qwen Image 1.0 (BF16)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "qwen_image_1.0_bf16_q6p.ckpt",
+      "name": "Qwen Image 1.0 (BF16, 6-bit)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "qwen_image_edit_2511_q8p.ckpt",
+      "name": "Qwen Image Edit 2511",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "image-to-image",
+      "huggingFace": "Qwen/Qwen-Image-Edit-2511"
+    },
+    {
+      "model": "qwen_image_edit_2511_i8x.ckpt",
+      "name": "Qwen Image Edit 2511 (8-bit S)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "image-to-image",
+      "huggingFace": "Qwen/Qwen-Image-Edit-2511"
+    },
+    {
+      "model": "qwen_image_edit_2511_q6p.ckpt",
+      "name": "Qwen Image Edit 2511 (6-bit)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "qwen_image_edit_2511_bf16_q8p.ckpt",
+      "name": "Qwen Image Edit 2511 (BF16)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "qwen_image_edit_2511_bf16_i8x.ckpt",
+      "name": "Qwen Image Edit 2511 (BF16, 8-bit S)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "qwen_image_edit_2511_bf16_q6p.ckpt",
+      "name": "Qwen Image Edit 2511 (BF16, 6-bit)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "qwen_image_layered_1.0_bf16_q8p.ckpt",
+      "name": "Qwen Image Layered 1.0 (BF16)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "text-to-image",
+      "huggingFace": "Qwen/Qwen-Image-Layered"
+    },
+    {
+      "model": "qwen_image_layered_1.0_bf16_q6p.ckpt",
+      "name": "Qwen Image Layered 1.0 (BF16, 6-bit)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "qwen_image_edit_2509_q8p.ckpt",
+      "name": "Qwen Image Edit 2509",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "image-to-image",
+      "huggingFace": "Qwen/Qwen-Image-Edit-2509"
+    },
+    {
+      "model": "qwen_image_edit_2509_q6p.ckpt",
+      "name": "Qwen Image Edit 2509 (6-bit)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "qwen_image_edit_2509_bf16_q8p.ckpt",
+      "name": "Qwen Image Edit 2509 (BF16)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "qwen_image_edit_2509_bf16_q6p.ckpt",
+      "name": "Qwen Image Edit 2509 (BF16, 6-bit)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "qwen_image_edit_1.0_q8p.ckpt",
+      "name": "Qwen Image Edit 1.0",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "image-to-image",
+      "huggingFace": "Qwen/Qwen-Image-Edit"
+    },
+    {
+      "model": "qwen_image_edit_1.0_q6p.ckpt",
+      "name": "Qwen Image Edit 1.0 (6-bit)",
+      "source": "official",
+      "baseType": "qwen",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "hidream_i1_fast_q8p.ckpt",
+      "name": "HiDream I1 [fast]",
+      "source": "official",
+      "baseType": "hidream",
+      "purpose": "text-to-image",
+      "huggingFace": "HiDream-ai/HiDream-I1-Fast"
+    },
+    {
+      "model": "hidream_i1_fast_i8x.ckpt",
+      "name": "HiDream I1 [fast] (8-bit S)",
+      "source": "official",
+      "baseType": "hidream",
+      "purpose": "text-to-image",
+      "huggingFace": "HiDream-ai/HiDream-I1-Fast"
+    },
+    {
+      "model": "hidream_i1_fast_q5p.ckpt",
+      "name": "HiDream I1 [fast] (5-bit)",
+      "source": "official",
+      "baseType": "hidream",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "hidream_i1_dev_q8p.ckpt",
+      "name": "HiDream I1 [dev]",
+      "source": "official",
+      "baseType": "hidream",
+      "purpose": "text-to-image",
+      "huggingFace": "HiDream-ai/HiDream-I1-Dev"
+    },
+    {
+      "model": "hidream_i1_dev_i8x.ckpt",
+      "name": "HiDream I1 [dev] (8-bit S)",
+      "source": "official",
+      "baseType": "hidream",
+      "purpose": "text-to-image",
+      "huggingFace": "HiDream-ai/HiDream-I1-Dev"
+    },
+    {
+      "model": "hidream_i1_dev_q5p.ckpt",
+      "name": "HiDream I1 [dev] (5-bit)",
+      "source": "official",
+      "baseType": "hidream",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "hidream_i1_full_q8p.ckpt",
+      "name": "HiDream I1 [full]",
+      "source": "official",
+      "baseType": "hidream",
+      "purpose": "text-to-image",
+      "huggingFace": "HiDream-ai/HiDream-I1-Full"
+    },
+    {
+      "model": "hidream_i1_full_i8x.ckpt",
+      "name": "HiDream I1 [full] (8-bit S)",
+      "source": "official",
+      "baseType": "hidream",
+      "purpose": "text-to-image",
+      "huggingFace": "HiDream-ai/HiDream-I1-Full"
+    },
+    {
+      "model": "hidream_i1_full_q5p.ckpt",
+      "name": "HiDream I1 [full] (5-bit)",
+      "source": "official",
+      "baseType": "hidream",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "hidream_e1_1_q8p.ckpt",
+      "name": "HiDream E1-1",
+      "source": "official",
+      "baseType": "hidream",
+      "purpose": "text-to-image",
+      "huggingFace": "HiDream-ai/HiDream-E1-1"
+    },
+    {
+      "model": "hidream_e1_1_q5p.ckpt",
+      "name": "HiDream E1-1 (5-bit)",
+      "source": "official",
+      "baseType": "hidream",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "hidream_e1_full_q8p.ckpt",
+      "name": "HiDream E1 [full]",
+      "source": "official",
+      "baseType": "hidream",
+      "purpose": "text-to-image",
+      "huggingFace": "HiDream-ai/HiDream-E1-Full"
+    },
+    {
+      "model": "hidream_e1_full_q5p.ckpt",
+      "name": "HiDream E1 [full] (5-bit)",
+      "source": "official",
+      "baseType": "hidream",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "wan_v2.2_a14b_hne_t2v_q8p.ckpt",
+      "name": "Wan 2.2 High Noise Expert T2V A14B",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "text-to-video",
+      "huggingFace": "Wan-AI/Wan2.2-T2V-A14B"
+    },
+    {
+      "model": "wan_v2.2_a14b_hne_t2v_i8x.ckpt",
+      "name": "Wan 2.2 High Noise Expert T2V A14B (8-b...",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "text-to-video",
+      "huggingFace": "Wan-AI/Wan2.2-T2V-A14B"
+    },
+    {
+      "model": "wan_v2.2_a14b_hne_t2v_q6p_svd.ckpt",
+      "name": "Wan 2.2 High Noise Expert T2V A14B (6-b...",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "wan_v2.2_a14b_lne_t2v_q8p.ckpt",
+      "name": "Wan 2.2 Low Noise Expert T2V A14B",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "wan_v2.2_a14b_lne_t2v_i8x.ckpt",
+      "name": "Wan 2.2 Low Noise Expert T2V A14B (8-bi...",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "wan_v2.2_a14b_lne_t2v_q6p_svd.ckpt",
+      "name": "Wan 2.2 Low Noise Expert T2V A14B (6-bi...",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "wan_v2.2_a14b_hne_i2v_q8p.ckpt",
+      "name": "Wan 2.2 High Noise Expert I2V A14B",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "image-to-video",
+      "huggingFace": "Wan-AI/Wan2.2-I2V-A14B"
+    },
+    {
+      "model": "wan_v2.2_a14b_hne_i2v_i8x.ckpt",
+      "name": "Wan 2.2 High Noise Expert I2V A14B (8-b...",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "image-to-video",
+      "huggingFace": "Wan-AI/Wan2.2-I2V-A14B"
+    },
+    {
+      "model": "wan_v2.2_a14b_hne_i2v_q6p_svd.ckpt",
+      "name": "Wan 2.2 High Noise Expert I2V A14B (6-b...",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "wan_v2.2_a14b_lne_i2v_q8p.ckpt",
+      "name": "Wan 2.2 Low Noise Expert I2V A14B",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "wan_v2.2_a14b_lne_i2v_i8x.ckpt",
+      "name": "Wan 2.2 Low Noise Expert I2V A14B (8-bi...",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "wan_v2.2_a14b_lne_i2v_q6p_svd.ckpt",
+      "name": "Wan 2.2 Low Noise Expert I2V A14B (6-bi...",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "wan_v2.2_5b_ti2v_f16.ckpt",
+      "name": "Wan 2.2 TI2V 5B",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "image-to-video",
+      "huggingFace": "Wan-AI/Wan2.2-TI2V-5B"
+    },
+    {
+      "model": "wan_v2.2_5b_ti2v_q8p.ckpt",
+      "name": "Wan 2.2 TI2V 5B (8-bit)",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "wan_v2.1_1.3b_480p_f16.ckpt",
+      "name": "Wan 2.1 T2V 1.3B",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "text-to-video",
+      "huggingFace": "Wan-AI/Wan2.1-T2V-1.3B"
+    },
+    {
+      "model": "wan_v2.1_1.3b_480p_q8p.ckpt",
+      "name": "Wan 2.1 T2V 1.3B (8-bit)",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "wan_v2.1_14b_720p_q8p.ckpt",
+      "name": "Wan 2.1 T2V 14B",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "text-to-video",
+      "huggingFace": "Wan-AI/Wan2.1-T2V-14B"
+    },
+    {
+      "model": "wan_v2.1_14b_720p_q6p_svd.ckpt",
+      "name": "Wan 2.1 T2V 14B (6-bit, SVDQuant)",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "wan_v2.1_14b_720p_q5p_svd.ckpt",
+      "name": "Wan 2.1 T2V 14B (5-bit, SVDQuant)",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "wan_v2.1_14b_i2v_480p_q8p.ckpt",
+      "name": "Wan 2.1 I2V 14B 480p",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "image-to-video",
+      "huggingFace": "Wan-AI/Wan2.1-I2V-14B-480P"
+    },
+    {
+      "model": "wan_v2.1_14b_i2v_480p_q6p_svd.ckpt",
+      "name": "Wan 2.1 I2V 14B 480p (6-bit, SVDQuant)",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "wan_v2.1_14b_i2v_720p_q8p.ckpt",
+      "name": "Wan 2.1 I2V 14B 720p",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "image-to-video",
+      "huggingFace": "Wan-AI/Wan2.1-I2V-14B-720P"
+    },
+    {
+      "model": "wan_v2.1_14b_i2v_720p_q6p_svd.ckpt",
+      "name": "Wan 2.1 I2V 14B 720p (6-bit, SVDQuant)",
+      "source": "official",
+      "baseType": "wan",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "flux_1_schnell_q8p.ckpt",
+      "name": "FLUX.1 [schnell]",
+      "source": "official",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.1-schnell"
+    },
+    {
+      "model": "flux_1_schnell_q5p.ckpt",
+      "name": "FLUX.1 [schnell] (5-bit)",
+      "source": "official",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "pixart_sigma_xl_2_1024_ms_f16.ckpt",
+      "name": "PixArt Sigma XL 1K",
+      "source": "official",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "pixart_sigma_xl_2_1024_ms_q8p.ckpt",
+      "name": "PixArt Sigma XL 1K (8-bit)",
+      "source": "official",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "pixart_sigma_xl_2_512_ms_f16.ckpt",
+      "name": "PixArt Sigma XL 512",
+      "source": "official",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "pixart_sigma_xl_2_512_ms_q8p.ckpt",
+      "name": "PixArt Sigma XL 512 (8-bit)",
+      "source": "official",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "auraflow_v0.1_q8p.ckpt",
+      "name": "AuraFlow v0.1",
+      "source": "official",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "auraflow_v0.1_q5p.ckpt",
+      "name": "AuraFlow v0.1 (8-bit)",
+      "source": "official",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "auraflow_v0.2_q8p.ckpt",
+      "name": "AuraFlow v0.2",
+      "source": "official",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "auraflow_v0.2_q5p.ckpt",
+      "name": "AuraFlow v0.2 (8-bit)",
+      "source": "official",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd_xl_base_1.0_f16.ckpt",
+      "name": "SDXL Base (v1.0)",
+      "source": "official",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd_xl_base_1.0_q6p_q8p.ckpt",
+      "name": "SDXL Base v1.0 (8-bit)",
+      "source": "official",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd_xl_refiner_1.0_f16.ckpt",
+      "name": "SDXL Refiner (v1.0)",
+      "source": "official",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd_xl_refiner_1.0_q6p_q8p.ckpt",
+      "name": "SDXL Refiner v1.0 (8-bit)",
+      "source": "official",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd_xl_base_0.9_f16.ckpt",
+      "name": "SDXL Base (v0.9)",
+      "source": "official",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd_xl_refiner_0.9_f16.ckpt",
+      "name": "SDXL Refiner (v0.9)",
+      "source": "official",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "fooocus_inpaint_sd_xl_v2.6_f16.ckpt",
+      "name": "Fooocus Inpaint SDXL v2.6",
+      "source": "official",
+      "baseType": "sdxl",
+      "purpose": "inpainting"
+    },
+    {
+      "model": "fooocus_inpaint_sd_xl_v2.6_q6p_q8p.ckpt",
+      "name": "Fooocus Inpaint SDXL v2.6 (8-bit)",
+      "source": "official",
+      "baseType": "sdxl",
+      "purpose": "inpainting"
+    },
+    {
+      "model": "sd_v1.4_f16.ckpt",
+      "name": "Stable Diffusion v1.4",
+      "source": "official",
+      "baseType": "sd1",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd_v1.5_f16.ckpt",
+      "name": "Stable Diffusion v1.5",
+      "source": "official",
+      "baseType": "sd1",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd_v1.5_inpainting_f16.ckpt",
+      "name": "Stable Diffusion v1.5 Inpainting",
+      "source": "official",
+      "baseType": "sd1",
+      "purpose": "inpainting"
+    },
+    {
+      "model": "sd_v2.0_f16.ckpt",
+      "name": "Stable Diffusion v2.0",
+      "source": "official",
+      "baseType": "sd2",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd_v2.0_768_v_f16.ckpt",
+      "name": "Stable Diffusion v2.0 768-v",
+      "source": "official",
+      "baseType": "sd2",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd_v2.0_inpainting_f16.ckpt",
+      "name": "Stable Diffusion v2.0 Inpainting",
+      "source": "official",
+      "baseType": "sd2",
+      "purpose": "inpainting"
+    },
+    {
+      "model": "sd_v2.0_depth_f16.ckpt",
+      "name": "Stable Diffusion v2.0 Depth",
+      "source": "official",
+      "baseType": "sd2",
+      "purpose": "depth"
+    },
+    {
+      "model": "sd_v2.1_f16.ckpt",
+      "name": "Stable Diffusion v2.1",
+      "source": "official",
+      "baseType": "sd2",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd_v2.1_768_v_f16.ckpt",
+      "name": "Stable Diffusion v2.1 768-v",
+      "source": "official",
+      "baseType": "sd2",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "kandinsky_f16.ckpt",
+      "name": "Kandinsky v2.1",
+      "source": "official",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "svd_i2v_xt_1.0_f16.ckpt",
+      "name": "Stable Video Diffusion I2V XT v1.0",
+      "source": "official",
+      "baseType": "svd1",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "svd_i2v_xt_1.0_q6p_q8p.ckpt",
+      "name": "Stable Video Diffusion I2V XT 1.0 (8-bit)",
+      "source": "official",
+      "baseType": "svd1",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "minisd_v1.4_f16.ckpt",
+      "name": "MiniSD v1.4",
+      "source": "official",
+      "baseType": "sd1",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "instruct_pix2pix_22000_f16.ckpt",
+      "name": "Instruct Pix2Pix",
+      "source": "official",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "realistic_vision_v5.1_f16.ckpt",
+      "name": "Realistic Vision v5.1",
+      "source": "official",
+      "baseType": "sd1",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "juggernaut_xl_v9_q6p_q8p.ckpt",
+      "name": "Juggernaut XL v9 (8-bit)",
+      "source": "official",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_2_klein_9b_q8p.ckpt",
+      "name": "FLUX.2 [klein] 9B",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-klein-9B"
+    },
+    {
+      "model": "flux_2_klein_9b_q6p.ckpt",
+      "name": "FLUX.2 [klein] 9B (6-bit)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-klein-9B"
+    },
+    {
+      "model": "flux_2_klein_9b_i8x.ckpt",
+      "name": "FLUX.2 [klein] 9B (8-bit S)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-klein-9B"
+    },
+    {
+      "model": "flux_2_klein_9b_kv_q8p.ckpt",
+      "name": "FLUX.2 [klein] 9B KV",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-klein-9b-kv"
+    },
+    {
+      "model": "flux_2_klein_9b_kv_q6p.ckpt",
+      "name": "FLUX.2 [klein] 9B KV (6-bit)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-klein-9b-kv"
+    },
+    {
+      "model": "flux_2_klein_9b_kv_i8x.ckpt",
+      "name": "FLUX.2 [klein] 9B KV (8-bit S)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-klein-9b-kv"
+    },
+    {
+      "model": "flux_2_dev_q8p.ckpt",
+      "name": "FLUX.2 [dev]",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-dev"
+    },
+    {
+      "model": "flux_2_dev_q6p.ckpt",
+      "name": "FLUX.2 [dev] (6-bit)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-dev"
+    },
+    {
+      "model": "flux_2_dev_i8x.ckpt",
+      "name": "FLUX.2 [dev] (8-bit S)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-dev"
+    },
+    {
+      "model": "flux_2_klein_base_9b_q8p.ckpt",
+      "name": "FLUX.2 [klein] 9B Base",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-klein-base-9B"
+    },
+    {
+      "model": "flux_2_klein_base_9b_q6p.ckpt",
+      "name": "FLUX.2 [klein] 9B Base (6-bit)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-klein-base-9B"
+    },
+    {
+      "model": "flux_2_klein_base_9b_i8x.ckpt",
+      "name": "FLUX.2 [klein] 9B Base (8-bit S)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image",
+      "huggingFace": "black-forest-labs/FLUX.2-klein-base-9B"
+    },
+    {
+      "model": "ltx_2.3_22b_distilled_f16.ckpt",
+      "name": "LTX-2.3 22B [distilled] (Exact)",
+      "source": "community",
+      "baseType": "ltx",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "ltx_2.3_22b_dev_f16.ckpt",
+      "name": "LTX-2.3 22B [dev] (Exact)",
+      "source": "community",
+      "baseType": "ltx",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "qwen_image_2512_bf16.ckpt",
+      "name": "Qwen Image 2512 (BF16, Exact)",
+      "source": "community",
+      "baseType": "qwen",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_2_klein_4b_f16.ckpt",
+      "name": "FLUX.2 [klein] 4B (Exact)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_2_klein_base_4b_f16.ckpt",
+      "name": "FLUX.2 [klein] 4B Base (Exact)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_2_klein_9b_f16.ckpt",
+      "name": "FLUX.2 [klein] 9B (Exact)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_2_klein_9b_kv_f16.ckpt",
+      "name": "FLUX.2 [klein] 9B KV (Exact)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_2_klein_base_9b_f16.ckpt",
+      "name": "FLUX.2 [klein] 9B Base (Exact)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_2_dev_f16.ckpt",
+      "name": "FLUX.2 [dev] (Exact)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "z_image_turbo_1.0_f16.ckpt",
+      "name": "Z Image Turbo 1.0 (Exact)",
+      "source": "community",
+      "baseType": "z-image",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "z_image_1.0_f16.ckpt",
+      "name": "Z Image Base 1.0 (Exact)",
+      "source": "community",
+      "baseType": "z-image",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "qwen_image_1.0_bf16.ckpt",
+      "name": "Qwen Image 1.0 (BF16, Exact)",
+      "source": "community",
+      "baseType": "qwen",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "qwen_image_1.0_f16.ckpt",
+      "name": "Qwen Image 1.0 (Exact)",
+      "source": "community",
+      "baseType": "qwen",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "qwen_image_edit_2509_bf16.ckpt",
+      "name": "Qwen Image Edit 2509 (BF16, Exact)",
+      "source": "community",
+      "baseType": "qwen",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "qwen_image_edit_2509_f16.ckpt",
+      "name": "Qwen Image Edit 2509 (Exact)",
+      "source": "community",
+      "baseType": "qwen",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "flux_1_kontext_dev_q8p.ckpt",
+      "name": "FLUX.1 Kontext [dev]",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "flux_1_kontext_dev_q5p.ckpt",
+      "name": "FLUX.1 Kontext [dev] (5-bit)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "flux_1_kontext_dev_f16.ckpt",
+      "name": "FLUX.1 Kontext [dev] (Exact)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "flux_1_krea_dev_q8p.ckpt",
+      "name": "FLUX.1 Krea [dev]",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_1_krea_dev_q5p.ckpt",
+      "name": "FLUX.1 Krea [dev] (5-bit)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_1_dev_q8p.ckpt",
+      "name": "FLUX.1 [dev]",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_1_dev_q5p.ckpt",
+      "name": "FLUX.1 [dev] (5-bit)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_1_fill_dev_q8p.ckpt",
+      "name": "FLUX.1 Fill [dev]",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_1_fill_dev_q5p.ckpt",
+      "name": "FLUX.1 Fill [dev] (5-bit)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "wan_v2.2_a14b_hne_t2v_lightning_250928_...",
+      "name": "Wan v2.2 High Noise Expert T2V A14B Lig...",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "wan_v2.2_a14b_hne_t2v_lightning_250928_...",
+      "name": "Wan v2.2 High Noise Expert T2V A14B Lig...",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "hidream_i1_dev_f16.ckpt",
+      "name": "HiDream I1 [dev] (Exact)",
+      "source": "community",
+      "baseType": "hidream",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "hidream_i1_full_f16.ckpt",
+      "name": "HiDream I1 [full] (Exact)",
+      "source": "community",
+      "baseType": "hidream",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "hidream_i1_fast_f16.ckpt",
+      "name": "HiDream I1 [fast] (Exact)",
+      "source": "community",
+      "baseType": "hidream",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "hidream_e1_1_f16.ckpt",
+      "name": "HiDream E1-1 (Exact)",
+      "source": "community",
+      "baseType": "hidream",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_1_dev_f16.ckpt",
+      "name": "FLUX.1 [dev] (Exact)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd3_large_turbo_3.5_q8p.ckpt",
+      "name": "SD3 Large Turbo 3.5",
+      "source": "community",
+      "baseType": "sd3",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd3_large_turbo_3.5_q6p.ckpt",
+      "name": "SD3 Large Turbo 3.5 (6-bit)",
+      "source": "community",
+      "baseType": "sd3",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd3_large_3.5_q8p.ckpt",
+      "name": "SD3 Large 3.5",
+      "source": "community",
+      "baseType": "sd3",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd3_large_3.5_q6p.ckpt",
+      "name": "SD3 Large 3.5 (6-bit)",
+      "source": "community",
+      "baseType": "sd3",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd3_large_3.5_f16.ckpt",
+      "name": "SD3 Large 3.5 (Exact)",
+      "source": "community",
+      "baseType": "sd3",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd3_medium_3.5_f16.ckpt",
+      "name": "SD3 Medium 3.5",
+      "source": "community",
+      "baseType": "sd3",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd3_medium_3.5_q8p.ckpt",
+      "name": "SD3 Medium 3.5 (8-bit)",
+      "source": "community",
+      "baseType": "sd3",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "hunyuan_video_t2v_720p_q8p.ckpt",
+      "name": "Hunyuan Video T2V 720p",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "hunyuan_video_t2v_720p_q5p_svd.ckpt",
+      "name": "Hunyuan Video T2V 720p (5-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "wan_2.1_14b_t2v_fusionx_q8p.ckpt",
+      "name": "Wan 2.1 14B T2V FusionX",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "wan_2.1_14b_t2v_fusionx_q6p_svd.ckpt",
+      "name": "Wan 2.1 14B T2V FusionX (6-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "wan_2.1_14b_i2v_fusionx_q8p.ckpt",
+      "name": "Wan 2.1 14B I2V FusionX",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "wan_2.1_14b_i2v_fusionx_q6p_svd.ckpt",
+      "name": "Wan 2.1 14B I2V FusionX (6-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "wan_2.1_14b_v1.1_fun_inp_q8p.ckpt",
+      "name": "Wan 2.1 14B v1.1 Fun InP",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "wan_2.1_14b_v1.1_fun_inp_q6p_svd.ckpt",
+      "name": "Wan 2.1 14B v1.1 Fun InP (6-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "wan_2.1_1.3b_v1.1_fun_inp_f16.ckpt",
+      "name": "Wan 2.1 1.3B v1.1 Fun InP",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "wan_2.1_1.3b_v1.1_fun_inp_q8p.ckpt",
+      "name": "Wan 2.1 1.3B v1.1 Fun InP (8-bit)",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "anisora_v3.2_i2v_wan_2.2_a14b_hne_q8p.ckpt",
+      "name": "AniSora v3.2 I2V Wan 2.2 A14B High Nois...",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "anisora_v3.2_i2v_wan_2.2_a14b_hne_q6p_s...",
+      "name": "AniSora v3.2 I2V Wan 2.2 A14B High Nois...",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "anisora_v3.2_i2v_wan_2.2_a14b_lne_q8p.ckpt",
+      "name": "AniSora v3.2 I2V Wan 2.2 A14B Low Noise...",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "anisora_v3.2_i2v_wan_2.2_a14b_lne_q6p_s...",
+      "name": "AniSora v3.2 I2V Wan 2.2 A14B Low Noise...",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "chronoedit_14b_q8p.ckpt",
+      "name": "ChronoEdit 14B",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "chronoedit_14b_q6p_svd.ckpt",
+      "name": "ChronoEdit 14B (6-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-image"
+    },
+    {
+      "model": "skyreels_v2_i2v_1.3b_540p_f16.ckpt",
+      "name": "SkyReels v2 I2V 1.3B 540p",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "skyreels_v2_i2v_1.3b_540p_q8p.ckpt",
+      "name": "SkyReels v2 I2V 1.3B 540p (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "skyreels_v2_i2v_14b_540p_q8p.ckpt",
+      "name": "SkyReels v2 I2V 14B 540p",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "skyreels_v2_i2v_14b_540p_q6p_svd.ckpt",
+      "name": "SkyReels v2 I2V 14B 540p (6-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "skyreels_v2_i2v_14b_720p_q8p.ckpt",
+      "name": "SkyReels v2 I2V 14B 720p",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "skyreels_v2_i2v_14b_720p_q6p_svd.ckpt",
+      "name": "SkyReels v2 I2V 14B 720p (6-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "skyreels_v2_t2v_14b_540p_q8p.ckpt",
+      "name": "SkyReels v2 T2V 14B 540p",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "skyreels_v2_t2v_14b_540p_q6p_svd.ckpt",
+      "name": "SkyReels v2 T2V 14B 540p (6-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "skyreels_v2_t2v_14b_720p_q8p.ckpt",
+      "name": "SkyReels v2 T2V 14B 720p",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "skyreels_v2_t2v_14b_720p_q6p_svd.ckpt",
+      "name": "SkyReels v2 T2V 14B 720p (6-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "wan_2.1_14b_fun_inp_q8p.ckpt",
+      "name": "Wan 2.1 14B Fun InP",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "wan_2.1_14b_fun_inp_q6p_svd.ckpt",
+      "name": "Wan 2.1 14B Fun InP (6-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "wan_2.1_1.3b_fun_inp_f16.ckpt",
+      "name": "Wan 2.1 1.3B Fun InP",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "wan_2.1_1.3b_fun_inp_q8p.ckpt",
+      "name": "Wan 2.1 1.3B Fun InP (8-bit)",
+      "source": "community",
+      "baseType": "wan",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "chroma_1_hd_r0.1_q8p.ckpt",
+      "name": "Chroma1 HD",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "chroma_1_hd_r0.1_q5p.ckpt",
+      "name": "Chroma1 HD (5-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "chroma_v48_detail_calibrated_q8p.ckpt",
+      "name": "Chroma v48 Detail Calibrated",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "chroma_v48_detail_calibrated_q5p.ckpt",
+      "name": "Chroma v48 Detail Calibrated (5-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "chroma_v47_detail_calibrated_q8p.ckpt",
+      "name": "Chroma v47 Detail Calibrated",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "chroma_v47_detail_calibrated_q5p.ckpt",
+      "name": "Chroma v47 Detail Calibrated (5-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "pixelwave_flux_1_schnell_04_q8p.ckpt",
+      "name": "PixelWave FLUX.1 Schnell 04",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "pixelwave_flux_1_schnell_04_q5p_svd.ckpt",
+      "name": "PixelWave FLUX.1 Schnell 04 (5-bit, SVD...",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "shuttle_v3.1_aesthetic_q8p.ckpt",
+      "name": "Shuttle v3.1 Aesthetic",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "shuttle_v3.1_aesthetic_q5p_svd.ckpt",
+      "name": "Shuttle v3.1 Aesthetic (5-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "shuttle_jaguar_q8p.ckpt",
+      "name": "Shuttle Jaguar",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "shuttle_jaguar_q5p_svd.ckpt",
+      "name": "Shuttle Jaguar (5-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "devmode_v0.3_turbo_q8p.ckpt",
+      "name": "devMODE v0.3 Turbo",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "devmode_v0.3_turbo_q5p_svd.ckpt",
+      "name": "devMODE v0.3 Turbo (5-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "schnellmode_v3.3_q8p.ckpt",
+      "name": "schnellMODE v3.3",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "schnellmode_v3.3_q5p_svd.ckpt",
+      "name": "schnellMODE v3.3 (5-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "artsy_vibe_v1_q8p.ckpt",
+      "name": "Artsy Vibe v1",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "artsy_vibe_v1_q5p_svd.ckpt",
+      "name": "Artsy Vibe v1 (5-bit, SVDQuant)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "rayflux_v3.0_aio_q8p.ckpt",
+      "name": "RayFLUX v3.0",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "rayflux_v3.0_aio_q5p.ckpt",
+      "name": "RayFLUX v3.0 (5-bit)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "skyreels_v1_hunyuan_t2v_q8p.ckpt",
+      "name": "SkyReels v1 Hunyuan T2V 544p",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "skyreels_v1_hunyuan_t2v_q5p_svd.ckpt",
+      "name": "SkyReels v1 Hunyuan T2V 544p (5-bit, SV...",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-video"
+    },
+    {
+      "model": "skyreels_v1_hunyuan_i2v_q8p.ckpt",
+      "name": "SkyReels v1 Hunyuan I2V 544p",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "skyreels_v1_hunyuan_i2v_q5p_svd.ckpt",
+      "name": "SkyReels v1 Hunyuan I2V 544p (5-bit, SV...",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "kwai_kolors_1.0_f16.ckpt",
+      "name": "Kwai Kolors 1.0",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "kwai_kolors_1.0_q6p_q8p.ckpt",
+      "name": "Kwai Kolors 1.0 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "kwai_kolors_inpainting_1.0_f16.ckpt",
+      "name": "Kwai Kolors Inpainting 1.0",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "inpainting"
+    },
+    {
+      "model": "kwai_kolors_inpainting_1.0_q6p_q8p.ckpt",
+      "name": "Kwai Kolors Inpainting 1.0 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "inpainting"
+    },
+    {
+      "model": "flux_1_depth_dev_q8p.ckpt",
+      "name": "FLUX.1 Depth [dev]",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_1_depth_dev_q5p.ckpt",
+      "name": "FLUX.1 Depth [dev] (5-bit)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_1_canny_dev_q8p.ckpt",
+      "name": "FLUX.1 Canny [dev]",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_1_canny_dev_q5p.ckpt",
+      "name": "FLUX.1 Canny [dev] (5-bit)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_1_dev_de_distill_q8p.ckpt",
+      "name": "FLUX.1 [dev] De-distill",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "flux_1_dev_de_distill_q5p.ckpt",
+      "name": "FLUX.1 [dev] De-distill (5-bit)",
+      "source": "community",
+      "baseType": "flux",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "wurstchen_3.0_stage_c_f32_f16.ckpt",
+      "name": "Stable Cascade (Würstchen v3.0)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "wurstchen_3.0_stage_c_f32_q6p_q8p.ckpt",
+      "name": "Stable Cascade (Würstchen v3.0) (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd3_medium_f16.ckpt",
+      "name": "SD3 Medium",
+      "source": "community",
+      "baseType": "sd3",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd3_medium_q8p.ckpt",
+      "name": "SD3 Medium (8-bit)",
+      "source": "community",
+      "baseType": "sd3",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "svd_i2v_xt_1.1_f16.ckpt",
+      "name": "Stable Video Diffusion I2V XT v1.1",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "svd_i2v_xt_1.1_q6p_q8p.ckpt",
+      "name": "Stable Video Diffusion I2V XT v1.1 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "playground_v2.5_f16.ckpt",
+      "name": "Playground v2.5",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "playground_v2.5_q6p_q8p.ckpt",
+      "name": "Playground v2.5 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "playground_v2_f16.ckpt",
+      "name": "Playground v2",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "playground_v2_q6p_q8p.ckpt",
+      "name": "Playground v2 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd_xl_turbo_f16.ckpt",
+      "name": "SDXL Turbo",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "sd_xl_turbo_q6p_q8p.ckpt",
+      "name": "SDXL Turbo (8-bit)",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "svd_i2v_1.0_f16.ckpt",
+      "name": "Stable Video Diffusion I2V v1.0",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "svd_i2v_1.0_q6p_q8p.ckpt",
+      "name": "Stable Video Diffusion I2V v1.0 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "image-to-video"
+    },
+    {
+      "model": "ssd_1b_f16.ckpt",
+      "name": "SSD 1B (Segmind SDXL)",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "ssd_1b_q6p_q8p.ckpt",
+      "name": "SSD 1B (Segmind SDXL) (8-bit)",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "juggernaut_xl_ragnarok_f16.ckpt",
+      "name": "Juggernaut XL Ragnarok",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "juggernaut_xl_ragnarok_q6p_q8p.ckpt",
+      "name": "Juggernaut XL Ragnarok (8-bit)",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "juggernaut_xl_v9_f16.ckpt",
+      "name": "Juggernaut XL v9",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "animagine_xl_v3.1_f16.ckpt",
+      "name": "Animagine XL v3.1",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "animagine_xl_v3.1_q6p_q8p.ckpt",
+      "name": "Animagine XL v3.1 (8-bit)",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "dreamshaper_xl_v2.1_turbo_f16.ckpt",
+      "name": "DreamShaper XL v2.1 Turbo",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "dreamshaper_xl_v2.1_turbo_q6p_q8p.ckpt",
+      "name": "DreamShaper XL v2.1 Turbo (8-bit)",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "juggernaut_xl_v9_lightning_f16.ckpt",
+      "name": "Juggernaut XL v9 Lightning",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "juggernaut_xl_v9_lightning_q6p_q8p.ckpt",
+      "name": "Juggernaut XL v9 Lightning (8-bit)",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "pixelwave_v9_f16.ckpt",
+      "name": "PixelWave v9",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "pixelwave_v9_q6p_q8p.ckpt",
+      "name": "PixelWave v9 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "pixelwave_10_f16.ckpt",
+      "name": "PixelWave 10",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "pixelwave_10_q6p_q8p.ckpt",
+      "name": "PixelWave 10 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "realvisxl_v4.0_f16.ckpt",
+      "name": "RealVisXL v4.0",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "realvisxl_v4.0_q6p_q8p.ckpt",
+      "name": "RealVisXL v4.0 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "juggernaut_xl_x_f16.ckpt",
+      "name": "Juggernaut XL X",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "juggernaut_xl_x_q6p_q8p.ckpt",
+      "name": "Juggernaut XL X (8-bit)",
+      "source": "community",
+      "baseType": "sdxl",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "icatcher_realistic_f16.ckpt",
+      "name": "iCatcher Realistic",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "icatcher_realistic_q6p_q8p.ckpt",
+      "name": "iCatcher Realistic (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "icatcher_cartoon_f16.ckpt",
+      "name": "iCatcher Cartoon",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "icatcher_cartoon_q6p_q8p.ckpt",
+      "name": "iCatcher Cartoon (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "colorfulxl_v6.0_f16.ckpt",
+      "name": "ColorfulXL v6.0",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "colorfulxl_v6.0_q6p_q8p.ckpt",
+      "name": "ColorfulXL v6.0 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "proteus_v0.3_f16.ckpt",
+      "name": "Proteus v0.3",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "proteus_v0.3_q6p_q8p.ckpt",
+      "name": "Proteus v0.3 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "ootd_vton_upper_body_1.0_f16.ckpt",
+      "name": "Outfitting Fusion Virtual Try-on (Upper...",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "ootd_vton_full_body_1.0_f16.ckpt",
+      "name": "Outfitting Fusion Virtual Try-on (Full-...",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "animatelcm_svd_xt_v1.1_f16.ckpt",
+      "name": "AnimateLCM SVD XT v1.1",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "animatelcm_svd_xt_v1.1_q6p_q8p.ckpt",
+      "name": "AnimateLCM SVD XT v1.1 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "juggernaut_reborn_f16.ckpt",
+      "name": "Juggernaut Reborn",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "juggernaut_reborn_q6p_q8p.ckpt",
+      "name": "Juggernaut Reborn (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "disney_pixar_cartoon_type_b_q6p_q8p.ckpt",
+      "name": "Disney Pixar Cartoon Type B (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "realistic_vision_v5.1_q6p_q8p.ckpt",
+      "name": "Realistic Vision v5.1 (8-bit)",
+      "source": "community",
+      "baseType": "sd1",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "dreamshaper_v8_f16.ckpt",
+      "name": "DreamShaper v8",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "dreamshaper_v8_q6p_q8p.ckpt",
+      "name": "DreamShaper v8 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "counterfeit_v3.0_f16.ckpt",
+      "name": "Counterfeit v3.0",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "counterfeit_v3.0_q6p_q8p.ckpt",
+      "name": "Counterfeit v3.0 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "majicmix_realistic_v7_f16.ckpt",
+      "name": "MajicMIX Realistic v7",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "majicmix_realistic_v7_q6p_q8p.ckpt",
+      "name": "MajicMIX Realistic v7 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "rev_animated_v1.22_f16.ckpt",
+      "name": "Rev Animated v1.22",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "rev_animated_v1.22_q6p_q8p.ckpt",
+      "name": "Rev Animated v1.22 (8-bit)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "wd_v1.3_f16.ckpt",
+      "name": "Anime (Waifu Diffusion v1.3)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "nitro_v1_f16.ckpt",
+      "name": "Multi-Style (Nitro Diffusion v1)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "cyberpunk_anime_f16.ckpt",
+      "name": "Cyberpunk Anime",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "redshift_v1_f16.ckpt",
+      "name": "3D Model (Redshift v1)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "redshift_768_v_f16.ckpt",
+      "name": "3D Model 768 (Redshift 768)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "dnd_30000_f16.ckpt",
+      "name": "Dungeons and Diffusion (30000)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "trnlgcy_f16.ckpt",
+      "name": "Tron Legacy",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "mdjrny_v4_f16.ckpt",
+      "name": "Openjourney",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "anything_v3_f16.ckpt",
+      "name": "Anime (Anything v3)",
+      "source": "community",
+      "baseType": "sd1",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "classicanim_v1_f16.ckpt",
+      "name": "Classic Animation (v1)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "modi_v1_f16.ckpt",
+      "name": "Modern Disney (v1)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "arcane_v3_f16.ckpt",
+      "name": "Arcane (v3)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "hassanblend_v1.5.1.2_f16.ckpt",
+      "name": "Hassanblend (v1.5.1.2)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "lvngvncnt_v2_f16.ckpt",
+      "name": "Van Gogh Style (Lvngvncnt v2)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "spiderverse_v1_f16.ckpt",
+      "name": "Spider-Verse (v1)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "eldenring_v3_f16.ckpt",
+      "name": "Elden Ring (v3)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "papercut_v1_f16.ckpt",
+      "name": "Paper Cut (v1)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "voxelart_v1_f16.ckpt",
+      "name": "VoxelArt (v1)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "balloonart_v1_f16.ckpt",
+      "name": "Balloon Art (v1)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "f222_f16.ckpt",
+      "name": "F222",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "supermarionation_v2_f16.ckpt",
+      "name": "Super Mario Nation (v2)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "inkpunk_v2_f16.ckpt",
+      "name": "Inkpunk (v2)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "samdoesart_v3_f16.ckpt",
+      "name": "SamDoesArt (v3)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "ghibli_v1_f16.ckpt",
+      "name": "Ghibli (v1)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "analog_v1_f16.ckpt",
+      "name": "Analog (v1)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "dnd_classes_and_species_f16.ckpt",
+      "name": "DnD Classes and Species",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "aloeveras_simpmaker_3k1_f16.ckpt",
+      "name": "AloeVera's SimpMaker 3K1",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "hna_3dkx_1.1_f16.ckpt",
+      "name": "H&A's 3DKX 1.1",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "seek_art_mega_v1_f16.ckpt",
+      "name": "seek.art MEGA (v1)",
+      "source": "community",
+      "baseType": "unknown",
+      "purpose": "text-to-image"
+    },
+    {
+      "model": "deliberate_v2_q6p_q8p.ckpt",
+      "name": "Deliberate v2.0 (8-bit)",
+      "source": "community",
+      "baseType": "sd1",
+      "purpose": "text-to-image"
+    }
+  ]
+}
