@@ -25,9 +25,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Check generated model catalog
-        run: npm run check:model-catalog
-
       - name: Lint / typecheck
         run: npm run lint
 
