@@ -60,7 +60,8 @@ Add to your `~/.openclaw/openclaw.json`:
           "defaultModel": "realistic_vision_v5.1_f16.ckpt",
           "defaultSize": "1024x1024",
           "defaultEditStrength": 0.5,
-          "defaultPromptMode": "auto"
+          "defaultPromptMode": "auto",
+          "defaultPromptAppend": "watercolor, soft brush strokes, cohesive painterly style"
         }
       }
     }
@@ -90,6 +91,7 @@ Add to your `~/.openclaw/openclaw.json`:
 | `defaultCfg` | number | model-specific | Override CFG guidance scale |
 | `defaultEditStrength` | number | 0.5 | Img2img/edit strength from 0-1 |
 | `defaultPromptMode` | string | `auto` | `auto`, `natural`, or `tagged` prompt handling |
+| `defaultPromptAppend` | string | - | Text appended to every generation/edit prompt before optimization; useful for fixed profiles like watercolor, cartoons, selfies, or charcoal |
 | `enablePromptOptimization` | boolean | mode-dependent | Enable/disable model-aware prompt conversion |
 | `highResSteps` | number | 15 | SD 1.5 high-resolution img2img upscale steps |
 | `timeoutMs` | number | 300000 | Per-generation CLI timeout in milliseconds |
@@ -146,6 +148,24 @@ Or use explicit tool calls:
 
 ```
 Use image_generate to create a cartoon cat
+```
+
+### Default Prompt Append
+
+Use `defaultPromptAppend` to lock a Draw Things-backed agent into a consistent visual profile. The plugin appends this text to every generation/edit prompt before model-aware prompt optimization, so a user prompt like `a portrait of a woman` can become `a portrait of a woman, watercolor, soft brush strokes, cohesive painterly style`.
+
+Example profiles:
+
+```json
+{
+  "defaultPromptAppend": "watercolor, soft brush strokes, cohesive painterly style"
+}
+```
+
+```json
+{
+  "defaultPromptAppend": "cartoon illustration, bold outlines, vibrant colors"
+}
 ```
 
 ### Image Editing (img2img)

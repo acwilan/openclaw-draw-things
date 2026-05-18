@@ -16,6 +16,7 @@ export interface DrawThingsConfig extends OpenClawConfig {
   defaultCfg?: number;
   defaultEditStrength?: number;
   defaultPromptMode?: PromptMode;
+  defaultPromptAppend?: string;
   enablePromptOptimization?: boolean;
   outputDir?: string;
   cliPath?: string;

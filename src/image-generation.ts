@@ -211,7 +211,8 @@ export function buildGenerationSettingsForModel(
 
   const promptMode = config.defaultPromptMode ?? metadata.promptMode;
   const shouldOptimize = config.enablePromptOptimization ?? promptMode !== "natural";
-  const optimizedPrompt = shouldOptimize ? optimizePromptForMode(req.prompt, promptMode, metadata.type) : req.prompt;
+  const prompt = appendDefaultPrompt(req.prompt, config.defaultPromptAppend);
+  const optimizedPrompt = shouldOptimize ? optimizePromptForMode(prompt, promptMode, metadata.type) : prompt;
 
   return {
     modelToUse,
@@ -251,6 +252,16 @@ export function buildGenerateArgs(settings: GenerationSettings, config: DrawThin
   }
 
   return args;
+}
+
+export function appendDefaultPrompt(prompt: string, defaultPromptAppend?: string): string {
+  const suffix = defaultPromptAppend?.trim();
+  if (!suffix) return prompt;
+
+  const trimmedPrompt = prompt.trim();
+  if (!trimmedPrompt) return suffix;
+
+  return `${trimmedPrompt}, ${suffix}`;
 }
 
 export function optimizePromptForMode(prompt: string, promptMode: PromptMode, modelType: string): string {

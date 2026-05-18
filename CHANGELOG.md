@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.7.0](https://github.com/acwilan/openclaw-draw-things/compare/v1.6.0...v1.7.0) (2026-05-14)
+
+### Features
+
+- Added `defaultPromptAppend` plugin config to append a fixed profile/style prompt to every image generation and edit request before model-aware prompt optimization. Useful for dedicated watercolor, cartoon, selfie, charcoal, or other profile-specific agents.
+
 ## [1.6.0](https://github.com/acwilan/openclaw-draw-things/compare/v1.5.1...v1.6.0) (2026-04-30)
 
 ### Features

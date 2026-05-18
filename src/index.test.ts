@@ -32,6 +32,7 @@ import {
   parseDrawThingsModelsList,
 } from "./draw-things-cli.js";
 import {
+  appendDefaultPrompt,
   buildGenerateArgs,
   buildGenerationSettingsForModel,
   optimizePromptForMode,
@@ -410,6 +411,21 @@ describe("Image generation provider internals", () => {
     expect(args).toContain("--models-dir");
   });
 
+  it("should append configured default prompt before optimization", () => {
+    expect(appendDefaultPrompt("a woman smiling", "watercolor, soft brush strokes")).toBe(
+      "a woman smiling, watercolor, soft brush strokes"
+    );
+    expect(appendDefaultPrompt("a woman smiling", "   ")).toBe("a woman smiling");
+
+    const settings = buildGenerationSettingsForModel(
+      { ...baseReq },
+      { defaultPromptMode: "natural", defaultPromptAppend: "watercolor, soft brush strokes" },
+      "sd_xl_base_1.0_f16.ckpt"
+    );
+
+    expect(settings.optimizedPrompt).toBe("a woman smiling, watercolor, soft brush strokes");
+  });
+
   it("should respect prompt mode overrides", () => {
     expect(optimizePromptForMode("a woman smiling", "natural", "sd15")).toBe("a woman smiling");
     expect(optimizePromptForMode("a woman smiling", "tagged", "sd15")).toContain("1girl");
@@ -421,5 +437,49 @@ describe("Plugin exports", () => {
     const module = await import("./index.js");
     expect(module.default).toBeDefined();
     expect(typeof module.default).toBe("object");
+  });
+
+  it("should merge full OpenClaw plugin config over pluginConfig defaults", async () => {
+    const { resolveStartupConfig } = await import("./index.js");
+    const config = resolveStartupConfig({
+      config: {
+        plugins: {
+          entries: {
+            "draw-things": {
+              enabled: true,
+              config: {
+                modelsDir: "/Volumes/ExtSD1/SD/Models",
+                cliPath: "draw-things-cli",
+                defaultModel: "realistic_vision_v5.1_f16.ckpt",
+              },
+            },
+          },
+        },
+      },
+      pluginConfig: {
+        cliPath: "draw-things-cli",
+        outputDir: "~/Downloads/draw-things-output",
+      },
+    } as any);
+
+    expect(config.modelsDir).toBe("/Volumes/ExtSD1/SD/Models");
+    expect(config.defaultModel).toBe("realistic_vision_v5.1_f16.ckpt");
+    expect(config.outputDir).toBe("~/Downloads/draw-things-output");
+  });
+
+  it("should register image provider even when modelsDir is absent at startup", async () => {
+    const module = await import("./index.js");
+    const imageProviders: any[] = [];
+    const textProviders: any[] = [];
+
+    module.default.register({
+      config: {},
+      pluginConfig: {},
+      registerProvider: (provider: any) => textProviders.push(provider),
+      registerImageGenerationProvider: (provider: any) => imageProviders.push(provider),
+    } as any);
+
+    expect(textProviders).toHaveLength(0);
+    expect(imageProviders.map((provider) => provider.id)).toContain("draw-things");
   });
 });
