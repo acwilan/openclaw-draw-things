@@ -2,7 +2,7 @@
   "id": "draw-things",
   "name": "Draw Things Image Generation",
   "description": "Local AI image generation using Draw Things CLI on Apple Silicon. Supports SD, SDXL, FLUX, and other Draw Things models without API costs.",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "author": "Andres Rovira",
   "authorUrl": "https://github.com/acwilan",
   "license": "MIT",
@@ -90,6 +90,10 @@
       "defaultPromptAppend": {
         "type": "string",
         "description": "Prompt text appended to every image generation/edit request before model-aware prompt optimization. Useful for locking an agent to a style/profile such as watercolor, cartoon, selfie, or charcoal."
+      },
+      "defaultConfigJson": {
+        "type": "object",
+        "description": "Draw Things JSGenerationConfiguration overrides forwarded through --config-json for every generation pass, such as loras, sampler, hiresFix, or upscaler. Explicit provider settings for model, dimensions, steps, CFG, and edit strength take precedence."
       },
       "enablePromptOptimization": {
         "type": "boolean",

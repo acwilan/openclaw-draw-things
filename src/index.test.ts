@@ -33,6 +33,7 @@ import {
 } from "./draw-things-cli.js";
 import {
   appendDefaultPrompt,
+  appendConfigJsonArgs,
   buildGenerateArgs,
   buildGenerationSettingsForModel,
   optimizePromptForMode,
@@ -409,6 +410,29 @@ describe("Image generation provider internals", () => {
     expect(args).toContain("--strength");
     expect(args).toContain("0.35");
     expect(args).toContain("--models-dir");
+  });
+
+  it("should pass configured Draw Things JSON overrides to generation", () => {
+    const settings = buildGenerationSettingsForModel(
+      { ...baseReq, size: "512x512" },
+      {},
+      DEFAULT_DRAW_THINGS_MODEL
+    );
+    const configJson = {
+      sampler: 12,
+      hiresFix: false,
+      loras: [{ mode: "all", file: "breath_of_the_wild_style_lora_f16.ckpt", weight: 1 }],
+    };
+    const args = buildGenerateArgs(settings, { defaultConfigJson: configJson });
+
+    expect(args[args.indexOf("--config-json") + 1]).toBe(JSON.stringify(configJson));
+  });
+
+  it("should append Draw Things JSON overrides to subsequent generation passes", () => {
+    const args: string[] = [];
+    appendConfigJsonArgs(args, { defaultConfigJson: { upscaler: "realesrgan" } });
+
+    expect(args).toEqual(["--config-json", '{"upscaler":"realesrgan"}']);
   });
 
   it("should append configured default prompt before optimization", () => {

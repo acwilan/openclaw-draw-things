@@ -61,7 +61,17 @@ Add to your `~/.openclaw/openclaw.json`:
           "defaultSize": "1024x1024",
           "defaultEditStrength": 0.5,
           "defaultPromptMode": "auto",
-          "defaultPromptAppend": "watercolor, soft brush strokes, cohesive painterly style"
+          "defaultPromptAppend": "watercolor, soft brush strokes, cohesive painterly style",
+          "defaultConfigJson": {
+            "sampler": 12,
+            "loras": [
+              {
+                "mode": "all",
+                "file": "breath_of_the_wild_style_lora_f16.ckpt",
+                "weight": 1
+              }
+            ]
+          }
         }
       }
     }
@@ -92,6 +102,7 @@ Add to your `~/.openclaw/openclaw.json`:
 | `defaultEditStrength` | number | 0.5 | Img2img/edit strength from 0-1 |
 | `defaultPromptMode` | string | `auto` | `auto`, `natural`, or `tagged` prompt handling |
 | `defaultPromptAppend` | string | - | Text appended to every generation/edit prompt before optimization; useful for fixed profiles like watercolor, cartoons, selfies, or charcoal |
+| `defaultConfigJson` | object | - | Draw Things `JSGenerationConfiguration` overrides forwarded through `--config-json`, including LoRAs, sampler, hires fix, upscaler, and other CLI-supported options |
 | `enablePromptOptimization` | boolean | mode-dependent | Enable/disable model-aware prompt conversion |
 | `highResSteps` | number | 15 | SD 1.5 high-resolution img2img upscale steps |
 | `timeoutMs` | number | 300000 | Per-generation CLI timeout in milliseconds |
@@ -167,6 +178,30 @@ Example profiles:
   "defaultPromptAppend": "cartoon illustration, bold outlines, vibrant colors"
 }
 ```
+
+### Draw Things Configuration Overrides and LoRAs
+
+Use `defaultConfigJson` for Draw Things-native options that are not part of OpenClaw's shared image-generation contract. The object is serialized and passed to `draw-things-cli generate --config-json` for both initial generation and high-resolution generation passes.
+
+```json
+{
+  "defaultConfigJson": {
+    "sampler": 12,
+    "hiresFix": false,
+    "loras": [
+      {
+        "mode": "all",
+        "file": "breath_of_the_wild_style_lora_f16.ckpt",
+        "weight": 1
+      }
+    ]
+  }
+}
+```
+
+The CLI applies these values before the plugin's explicit model, dimensions, steps, CFG, and edit-strength arguments, so the shared OpenClaw request controls continue to win for overlapping settings.
+
+OpenClaw's current `image_generate` request only defines provider-specific options for OpenAI. This means Draw Things overrides are persistent plugin configuration, not per-call tool parameters; supporting dynamic per-request LoRA selection requires an upstream extension of the image-generation contract.
 
 ### Image Editing (img2img)
 

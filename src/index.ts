@@ -30,7 +30,8 @@ function looksLikeDrawThingsConfig(config: OpenClawConfig | undefined): config i
     "cliPath" in config ||
     "outputDir" in config ||
     "defaultModel" in config ||
-    "defaultSize" in config
+    "defaultSize" in config ||
+    "defaultConfigJson" in config
   );
 }
 

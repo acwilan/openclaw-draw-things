@@ -243,6 +243,8 @@ export function buildGenerateArgs(settings: GenerationSettings, config: DrawThin
     "--model", settings.modelToUse,
   ];
 
+  appendConfigJsonArgs(args, config);
+
   if (inputImagePath) {
     args.push("--image", inputImagePath, "--strength", String(settings.editStrength));
   }
@@ -252,6 +254,12 @@ export function buildGenerateArgs(settings: GenerationSettings, config: DrawThin
   }
 
   return args;
+}
+
+export function appendConfigJsonArgs(args: string[], config: DrawThingsConfig): void {
+  if (config.defaultConfigJson) {
+    args.push("--config-json", JSON.stringify(config.defaultConfigJson));
+  }
 }
 
 export function appendDefaultPrompt(prompt: string, defaultPromptAppend?: string): string {
@@ -314,6 +322,8 @@ async function upscaleImage(
     "--model", settings.modelToUse,
     "--output", outputPath,
   ];
+
+  appendConfigJsonArgs(upscaleArgs, config);
 
   if (config.modelsDir) {
     upscaleArgs.push("--models-dir", expandHome(config.modelsDir));

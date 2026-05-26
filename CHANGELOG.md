@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/acwilan/openclaw-draw-things/compare/v1.7.0...v1.8.0) (2026-05-26)
+
+### Features
+
+- Added `defaultConfigJson` plugin config to forward Draw Things native generation options through `--config-json`, including LoRAs, samplers, high-resolution fix, upscalers, and other supported settings.
+- Applied configured Draw Things overrides to both initial generation and high-resolution follow-up passes.
+
 ## [1.7.0](https://github.com/acwilan/openclaw-draw-things/compare/v1.6.0...v1.7.0) (2026-05-14)
 
 ### Features
