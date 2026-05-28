@@ -146,8 +146,15 @@ describe("Core utilities", () => {
       ]);
     });
 
+    it("should default weight to 1.0 when omitted", () => {
+      const result = parseLoraTokens("a portrait <lora:realistic_vision>");
+      expect(result.cleanPrompt).toBe("a portrait");
+      expect(result.loras).toEqual([{ file: "realistic_vision", weight: 1.0 }]);
+    });
+
     it("should return empty loras for malformed weight", () => {
       const result = parseLoraTokens("a woman <lora:style:abc>");
+      // The malformed token doesn't match the regex at all (weight group is optional but must be numeric when present)
       expect(result.cleanPrompt).toBe("a woman <lora:style:abc>");
       expect(result.loras).toEqual([]);
     });

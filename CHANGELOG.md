@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.9.0](https://github.com/acwilan/openclaw-draw-things/compare/v1.8.0...v1.9.0) (2026-05-28)
+
+### Features
+
+- Added per-request LoRA injection via A1111/Stable Diffusion WebUI prompt token convention (`<lora:filename:weight>`). LoRA tokens are parsed from the prompt, stripped before CLI invocation, and injected into `--config-json` as Draw Things `loras` array. Multiple LoRAs per prompt are supported. Parsed LoRAs are merged after any `defaultConfigJson.loras` configured in the plugin profile, enabling dynamic LoRA usage without per-agent config overrides.
+- Weight parameter is optional — `<lora:filename>` defaults to weight `1.0`.
+- Added `loras` metadata to generation results.
+- Exported `ParsedLora` type and `parseLoraTokens` utility from `tool.ts`.
+
 ## [1.8.0](https://github.com/acwilan/openclaw-draw-things/compare/v1.7.0...v1.8.0) (2026-05-26)
 
 ### Features

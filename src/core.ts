@@ -7,24 +7,28 @@ export type ParsedLora = {
 };
 
 /**
- * Extracts `<lora:name:weight>` tokens from a prompt.
+ * Extracts `<lora:name>` or `<lora:name:weight>` tokens from a prompt.
  *
  * Supports the A1111/Stable Diffusion WebUI convention:
+ *   <lora:lora_file_name>
  *   <lora:lora_file_name:0.75>
  *
+ * Weight is optional and defaults to 1.0 when omitted.
  * The returned `cleanPrompt` has all LoRA tokens stripped.
  */
 export function parseLoraTokens(prompt: string): {
   cleanPrompt: string;
   loras: ParsedLora[];
 } {
-  const loraRegex = /<lora:([^:>]+):([\d.]+)>/g;
+  // Match both <lora:file> and <lora:file:weight> forms
+  const loraRegex = /<lora:([^:>]+)(?::([\d.]+))?>/g;
   const loras: ParsedLora[] = [];
   let match: RegExpExecArray | null;
 
   while ((match = loraRegex.exec(prompt)) !== null) {
     const file = match[1].trim();
-    const weight = parseFloat(match[2]);
+    const weightStr = match[2];
+    const weight = weightStr ? parseFloat(weightStr) : 1.0;
     loras.push({ file, weight: Number.isNaN(weight) ? 1.0 : weight });
   }
 
