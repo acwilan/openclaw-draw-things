@@ -15,6 +15,7 @@ import {
   getDefaultSize,
   getRecommendedSteps,
   getRecommendedCfg,
+  parseLoraTokens,
   type ModelType,
 } from "./core.js";
 import {
@@ -37,6 +38,7 @@ import {
   buildGenerateArgs,
   buildGenerationSettingsForModel,
   optimizePromptForMode,
+  type GenerationSettings,
 } from "./image-generation.js";
 
 describe("Core utilities", () => {
@@ -123,6 +125,43 @@ describe("Core utilities", () => {
     it("should return unknown for unrecognized models", () => {
       expect(detectModelType("mystery_model")).toBe("unknown");
       expect(detectModelType("custom_v1")).toBe("unknown");
+    });
+  });
+
+  describe("parseLoraTokens", () => {
+    it("should extract a single LoRA token", () => {
+      const result = parseLoraTokens("a beautiful woman <lora:realistic_vision:0.75>");
+      expect(result.cleanPrompt).toBe("a beautiful woman");
+      expect(result.loras).toEqual([{ file: "realistic_vision", weight: 0.75 }]);
+    });
+
+    it("should extract multiple LoRA tokens", () => {
+      const result = parseLoraTokens(
+        "a portrait <lora:breath_of_the_wild_style:1> with <lora:detailed_eyes:0.6>"
+      );
+      expect(result.cleanPrompt).toBe("a portrait with");
+      expect(result.loras).toEqual([
+        { file: "breath_of_the_wild_style", weight: 1 },
+        { file: "detailed_eyes", weight: 0.6 },
+      ]);
+    });
+
+    it("should return empty loras for malformed weight", () => {
+      const result = parseLoraTokens("a woman <lora:style:abc>");
+      expect(result.cleanPrompt).toBe("a woman <lora:style:abc>");
+      expect(result.loras).toEqual([]);
+    });
+
+    it("should return empty loras and unchanged prompt with no tokens", () => {
+      const result = parseLoraTokens("a beautiful sunset over mountains");
+      expect(result.cleanPrompt).toBe("a beautiful sunset over mountains");
+      expect(result.loras).toEqual([]);
+    });
+
+    it("should handle LoRA tokens surrounded by extra whitespace", () => {
+      const result = parseLoraTokens("art   <lora:pixel_art:0.8>   style");
+      expect(result.cleanPrompt).toBe("art style");
+      expect(result.loras).toEqual([{ file: "pixel_art", weight: 0.8 }]);
     });
   });
 
@@ -453,6 +492,47 @@ describe("Image generation provider internals", () => {
   it("should respect prompt mode overrides", () => {
     expect(optimizePromptForMode("a woman smiling", "natural", "sd15")).toBe("a woman smiling");
     expect(optimizePromptForMode("a woman smiling", "tagged", "sd15")).toContain("1girl");
+  });
+
+  it("should parse LoRA tokens from prompt and inject them into config-json", () => {
+    const settings = buildGenerationSettingsForModel(
+      { ...baseReq, prompt: "a woman smiling <lora:detailed_eyes:0.7>" },
+      {},
+      DEFAULT_DRAW_THINGS_MODEL
+    );
+
+    expect(settings.loras).toEqual([{ file: "detailed_eyes", weight: 0.7 }]);
+    expect(settings.optimizedPrompt).not.toContain("lora");
+
+    const args = buildGenerateArgs(settings, {}, undefined);
+    const configJsonArg = args[args.indexOf("--config-json") + 1];
+    const parsed = JSON.parse(configJsonArg);
+    expect(parsed.loras).toEqual([{ mode: "all", file: "detailed_eyes", weight: 0.7 }]);
+  });
+
+  it("should merge parsed LoRAs with existing defaultConfigJson loras", () => {
+    const settings = buildGenerationSettingsForModel(
+      { ...baseReq, prompt: "art <lora:pixel_art:0.9>" },
+      {},
+      DEFAULT_DRAW_THINGS_MODEL
+    );
+
+    const args = buildGenerateArgs(settings, {
+      defaultConfigJson: { loras: [{ mode: "all", file: "base_style.ckpt", weight: 1 }] },
+    }, undefined);
+
+    const configJsonArg = args[args.indexOf("--config-json") + 1];
+    const parsed = JSON.parse(configJsonArg);
+    expect(parsed.loras).toHaveLength(2);
+    expect(parsed.loras[0]).toEqual({ mode: "all", file: "base_style.ckpt", weight: 1 });
+    expect(parsed.loras[1]).toEqual({ mode: "all", file: "pixel_art", weight: 0.9 });
+  });
+
+  it("should not include config-json arg when no loras and no defaultConfigJson", () => {
+    const settings = buildGenerationSettingsForModel(baseReq, {}, DEFAULT_DRAW_THINGS_MODEL);
+    const args = buildGenerateArgs(settings, {}, undefined);
+
+    expect(args).not.toContain("--config-json");
   });
 });
 

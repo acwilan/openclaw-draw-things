@@ -1,5 +1,38 @@
 // Core utility functions for Draw Things with model-aware optimizations
 
+/** Parsed LoRA token from a prompt. */
+export type ParsedLora = {
+  file: string;
+  weight: number;
+};
+
+/**
+ * Extracts `<lora:name:weight>` tokens from a prompt.
+ *
+ * Supports the A1111/Stable Diffusion WebUI convention:
+ *   <lora:lora_file_name:0.75>
+ *
+ * The returned `cleanPrompt` has all LoRA tokens stripped.
+ */
+export function parseLoraTokens(prompt: string): {
+  cleanPrompt: string;
+  loras: ParsedLora[];
+} {
+  const loraRegex = /<lora:([^:>]+):([\d.]+)>/g;
+  const loras: ParsedLora[] = [];
+  let match: RegExpExecArray | null;
+
+  while ((match = loraRegex.exec(prompt)) !== null) {
+    const file = match[1].trim();
+    const weight = parseFloat(match[2]);
+    loras.push({ file, weight: Number.isNaN(weight) ? 1.0 : weight });
+  }
+
+  const cleanPrompt = prompt.replace(loraRegex, "").replace(/\s{2,}/g, " ").trim();
+  return { cleanPrompt, loras };
+}
+
+
 export const DEFAULT_SIZE = { width: 1024, height: 1024 };
 export const SD15_SIZE = { width: 512, height: 512 };
 

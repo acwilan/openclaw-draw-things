@@ -10,7 +10,9 @@ import {
   floorTo64,
   getNegativePrompt,
   optimizePrompt,
+  parseLoraTokens,
   parseSize,
+  type ParsedLora,
 } from "./core.js";
 import {
   DEFAULT_TIMEOUT_MS,
@@ -51,6 +53,8 @@ export type GenerationSettings = {
   optimizedPrompt: string;
   negativePrompt: string;
   modelType: string;
+  /** LoRAs parsed from `<lora:...>` tokens in the original prompt. */
+  loras: ParsedLora[];
 };
 
 export function registerImageGenerationProvider(api: OpenClawPluginApi, registrationConfig: DrawThingsConfig): void {
@@ -143,6 +147,7 @@ export function registerImageGenerationProvider(api: OpenClawPluginApi, registra
           modelType: settings.modelType,
           promptMode: settings.promptMode,
           optimized: settings.optimizedPrompt !== req.prompt,
+          loras: settings.loras.length > 0 ? settings.loras : undefined,
           edit: isEdit,
           strength: isEdit ? settings.editStrength : undefined,
         },
@@ -212,7 +217,10 @@ export function buildGenerationSettingsForModel(
   const promptMode = config.defaultPromptMode ?? metadata.promptMode;
   const shouldOptimize = config.enablePromptOptimization ?? promptMode !== "natural";
   const prompt = appendDefaultPrompt(req.prompt, config.defaultPromptAppend);
-  const optimizedPrompt = shouldOptimize ? optimizePromptForMode(prompt, promptMode, metadata.type) : prompt;
+
+  // Parse LoRA tokens from the raw prompt before optimization
+  const { cleanPrompt, loras } = parseLoraTokens(prompt);
+  const optimizedPrompt = shouldOptimize ? optimizePromptForMode(cleanPrompt, promptMode, metadata.type) : cleanPrompt;
 
   return {
     modelToUse,
@@ -228,6 +236,7 @@ export function buildGenerationSettingsForModel(
     optimizedPrompt,
     negativePrompt: getNegativePrompt(toCoreModelType(metadata.type)),
     modelType: metadata.type,
+    loras,
   };
 }
 
@@ -243,7 +252,7 @@ export function buildGenerateArgs(settings: GenerationSettings, config: DrawThin
     "--model", settings.modelToUse,
   ];
 
-  appendConfigJsonArgs(args, config);
+  appendConfigJsonArgs(args, config, settings.loras);
 
   if (inputImagePath) {
     args.push("--image", inputImagePath, "--strength", String(settings.editStrength));
@@ -256,10 +265,31 @@ export function buildGenerateArgs(settings: GenerationSettings, config: DrawThin
   return args;
 }
 
-export function appendConfigJsonArgs(args: string[], config: DrawThingsConfig): void {
-  if (config.defaultConfigJson) {
-    args.push("--config-json", JSON.stringify(config.defaultConfigJson));
+export function appendConfigJsonArgs(args: string[], config: DrawThingsConfig, loras?: ParsedLora[]): void {
+  const merged = mergeConfigJsonWithLoras(config.defaultConfigJson, loras);
+  if (merged && Object.keys(merged).length > 0) {
+    args.push("--config-json", JSON.stringify(merged));
   }
+}
+
+function mergeConfigJsonWithLoras(
+  base: Record<string, unknown> | undefined,
+  loras: ParsedLora[] | undefined
+): Record<string, unknown> | undefined {
+  if (!base && (!loras || loras.length === 0)) return undefined;
+
+  const merged = { ...(base ?? {}) };
+
+  if (loras && loras.length > 0) {
+    // Merge parsed LoRAs after any already configured in defaultConfigJson
+    const existing = Array.isArray(merged.loras) ? [...merged.loras] : [];
+    merged.loras = [
+      ...existing,
+      ...loras.map((l) => ({ mode: "all", file: l.file, weight: l.weight })),
+    ];
+  }
+
+  return merged;
 }
 
 export function appendDefaultPrompt(prompt: string, defaultPromptAppend?: string): string {
@@ -323,7 +353,7 @@ async function upscaleImage(
     "--output", outputPath,
   ];
 
-  appendConfigJsonArgs(upscaleArgs, config);
+  appendConfigJsonArgs(upscaleArgs, config, settings.loras);
 
   if (config.modelsDir) {
     upscaleArgs.push("--models-dir", expandHome(config.modelsDir));

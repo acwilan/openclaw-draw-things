@@ -1,5 +1,7 @@
 // Re-export core utilities for direct use if needed
 export {
+  ParsedLora,
+  parseLoraTokens,
   DEFAULT_SIZE,
   SD15_SIZE,
   roundTo64,
